@@ -1,0 +1,1000 @@
+======================================================
+PREGUNTA 1: ¿Cómo se define una función de usuario con la sentencia function y argumentos de entrada y salida?
+RESPUESTA (Chunk #754 | Puntuacion BERT: 0.5406):
+MATLAB, se ha querido mostrar cómo se realiza la comunicación entre C y MATLAB, cómo llegan los datos al fichero MEX, qué es lo que se hace con estos datos en mex- Function y cómo se devuelven finalmente los resultados a MATLAB. C En mexFunction: Se crean las variables C donde se almacenan los argumentos de entrada y de salida: // inputs double *a, *b; // outputs double *c; Se crean los mxArrays (Matlab arrays) donde se almacenan los valores de los argumentos de salida:
+
+  --- Top 1 (Chunk 754 | Score 0.5406) ---
+  MATLAB, se ha querido mostrar cómo se realiza la comunicación entre C y MATLAB, cómo llegan los datos al fichero MEX, qué es lo que se hace con estos datos en mex- Function y cómo se devuelven finalmente los resultados a MATLAB. C En mexFunction: Se crean las variables C donde se almacenan los argumentos de entrada y de salida: // inputs double *a, *b; // outputs double *c; Se crean los mxArrays (Matlab arrays) donde se almacenan los valores de los argumentos de salida:
+
+  --- Top 2 (Chunk 755 | Score 0.4550) ---
+  // inputs double *a, *b; // outputs double *c; Se crean los mxArrays (Matlab arrays) donde se almacenan los valores de los argumentos de salida: plhs[0] = mxCreateDoubleMatrix(3, 1, mxREAL); Se asocian plhs[0], plhs[1],...con las variables puntero de C creadas: c = mxGetPr(plhs[0]); Se extraen los valores de los argumentos de entrada con la función mxGet: a = mxGetPr(prhs[0]); b = mxGetPr(prhs[1]); Finalmente se llama a la función programa en C: prodVectC(a,b,c); MATLAB Las llamadas a las funciones MEX se realizan de la misma forma
+
+  --- Top 3 (Chunk 470 | Score 0.3922) ---
+  y los comandos necesarios para modificar el path. 6.3.2. DEFINICIÓN DE FUNCIONES La primera línea de un fichero llamado name.m que define una función tiene la forma: function [lista de valores de retorno] = name(lista de argumentos) donde name es el nombre de la función. Entre corchetes y separados por comas van los valores de retorno (siempre que haya más de uno), y entre paréntesis también separados por comas los argumentos. Puede haber funciones sin valor de retorno y también sin argumentos. Recuérdese que los
+
+  --- Top 4 (Chunk 744 | Score 0.3782) ---
+  pasar a la función C. 2. nhrs es el número de argumentos de entrada de la función. 3. plhs y nlhs son análogos pero referidos a los argumentos de salida (left hand side arguments). Antes de seguir adelante con esta explicación es conveniente decir algo sobre los mxArrays, que los únicos objetos con los que trabaja MATLAB. Todos los tipos de variables de MATLAB (escalares, vectores, matrices, cadenas de caracteres, estructuras, vectores de celdas, etc.) son mxArrays. Para cada mxArray MATLAB almacena el tipo, las
+
+  --- Top 5 (Chunk 215 | Score 0.3327) ---
+  parte imaginaria. MATLAB trabaja sin ninguna dificultad con números complejos. Para ver como se representan por defecto los números complejos, ejecútense los siguientes comandos: >> a=sqrt(-4) a = 0 + 2.0000i >> 3 + 4j ans = 3.0000 + 4.0000i En la entrada de datos de MATLAB se pueden utilizar indistintamente la i y la j para representar el número imaginario unidad (en la salida, sin embargo, puede verse que siempre aparece la i). Si la i o la j no están definidas como variables,
+
+======================================================
+PREGUNTA 2: ¿Cómo se define un vector fila y un vector columna?
+RESPUESTA (Chunk #177 | Puntuacion BERT: 0.6260):
+0.0000 1.0000 0.0000 0.0000 0.0000 1.0000 De forma análoga a las matrices, es posible definir un vector fila x en la forma siguiente (si los tres números están separados por blancos o comas, el resultado será un vector fila): >> x=[10 20 30] % vector fila x = 10 20 30 Por el contrario, si los números están separados por intros o puntos y coma (;) se obtendrá un vector columna: >> y=[11; 12; 13] % vector columna y = 11 12 13 MATLAB tiene
+
+  --- Top 1 (Chunk 177 | Score 0.6260) ---
+  0.0000 1.0000 0.0000 0.0000 0.0000 1.0000 De forma análoga a las matrices, es posible definir un vector fila x en la forma siguiente (si los tres números están separados por blancos o comas, el resultado será un vector fila): >> x=[10 20 30] % vector fila x = 10 20 30 Por el contrario, si los números están separados por intros o puntos y coma (;) se obtendrá un vector columna: >> y=[11; 12; 13] % vector columna y = 11 12 13 MATLAB tiene
+
+  --- Top 2 (Chunk 252 | Score 0.5962) ---
+  las formas que se muestran a continuación: >> x=1:2:10 x = 1 3 5 7 9 >> x=1:1.5:10 x = 1.0000 2.5000 4.0000 5.5000 7.0000 8.5000 10.0000 >> x=10:-1:1 x = 10 9 8 7 6 5 4 3 2 1 Puede verse que, por defecto, este operador produce vectores fila. Si se desea obtener un vector columna basta trasponer el resultado. El siguiente ejemplo genera una tabla de funciones seno y coseno. Ejecútese y obsérvese el resultado (recuérdese que con (;) después de un
+
+  --- Top 3 (Chunk 403 | Score 0.5807) ---
+  índices de fila, de columna y valores de los elementos, a partir de los cuáles se puede volver a crear la matriz spy(S) Representa en una figura los elementos distintos de cero de la matriz nnz(S) Devuelve el número de elementos distintos de cero nonzeros(S) Devuelve un vector lleno que contiene los elementos distintos de cero nzmax(S) Memoria reservada para elementos distintos de cero spones(S) Reemplazar los elementos distintos de cero por unos spalloc(m,n,nzmax) Reserva espacio para una matriz dispersa m×n issparse(S) Devuelve true si
+
+  --- Top 4 (Chunk 613 | Score 0.5753) ---
+  grid disp('Ya he terminado') En estos comandos tspan es un vector que define el intervalo temporal de integración. Es muy importante que en la función ode45, el vector de condiciones iniciales y0 sea un vector columna. El vector t devuelto por ode45 contiene los valores del tiempo para los cuales se ha calculado la posición y velocidad. Dichos valores son controlados por la función ode45 y no por el usuario, por lo que de ordinario no estarán igualmente espaciados. La matriz de resultados Y contiene
+
+  --- Top 5 (Chunk 178 | Score 0.5429) ---
+  intros o puntos y coma (;) se obtendrá un vector columna: >> y=[11; 12; 13] % vector columna y = 11 12 13 MATLAB tiene en cuenta la diferencia entre vectores fila y vectores columna. Por ejemplo, si se intenta sumar los vectores x e y se obtendrá el siguiente mensaje de error: >> x+y ??? Error using ==> + Matrix dimensions must agree. Estas dificultades desaparecen si se suma x con el vector transpuesto de y: >> x+y' ans = 21 32 43 MATLAB
+
+======================================================
+PREGUNTA 3: ¿Para qué sirve el punto y coma ; al final de una sentencia en los ficheros de comandos?
+RESPUESTA (Chunk #163 | Puntuacion BERT: 0.6522):
+>> tic; x=A\b; toc donde se han puesto varias sentencias en la misma línea para que se ejecuten todas sin tiempos muertos al pulsar intro. Esto es especialmente importante en la línea de comandos en la que se quiere medir los tiempos. Todas las sentencias de cálculos matriciales van seguidas de punto y coma (;) con objeto de evitar la impresión de resultados. Conviene ejecutar dos o tres veces cada sentencia para obtener tiempos óptimos, ya que la primera vez que se ejecutan se emplea
+
+  --- Top 1 (Chunk 163 | Score 0.6522) ---
+  >> tic; x=A\b; toc donde se han puesto varias sentencias en la misma línea para que se ejecuten todas sin tiempos muertos al pulsar intro. Esto es especialmente importante en la línea de comandos en la que se quiere medir los tiempos. Todas las sentencias de cálculos matriciales van seguidas de punto y coma (;) con objeto de evitar la impresión de resultados. Conviene ejecutar dos o tres veces cada sentencia para obtener tiempos óptimos, ya que la primera vez que se ejecutan se emplea
+
+  --- Top 2 (Chunk 465 | Score 0.5971) ---
+  base de MATLAB. Por el contrario, si se ejecuta desde una función, las variables que crea pertenecen al espacio de trabajo de la función (ver apartado 2.5.6, en la página 14). En los ficheros de comandos conviene poner los puntos y coma (;) al final de cada sentencia, para evitar una salida de resultados demasiado cuantiosa. Un fichero *.m puede llamar a otros ficheros *.m, e incluso se puede llamar a sí mismo de modo recursivo. Sin embargo, no se puede hacer profile (ver apartado
+
+  --- Top 3 (Chunk 810 | Score 0.5920) ---
+  verde entre dos puntos, esta función se llamaría de la siguiente manera: >> line([xini, xend]', [yini, yend]', 'color', 'g') Se puede también dibujar dos líneas a la vez utilizando la forma: >> line([xini1 xini2; xend1 xend2], ([yini1 yini2; yend1 yend2]); Finalmente, si cada columna de la matriz X contiene la coordenada x inicial y final de un punto, y lo mismo las columnas de la matriz Y con las coordenadas y, la siguiente sentencia dibuja tantas líneas como columnas tengan las matrices X e Y:
+
+  --- Top 4 (Chunk 226 | Score 0.3976) ---
+  hay que introducir tres puntos (...) antes de pulsar intro. También se pueden incluir varias expresiones en una misma línea separándolas por comas (,) o puntos y comas (;). Si una expresión termina en punto y coma (;) su resultado se calcula, pero no se escribe en pantalla. Esta posibilidad es muy interesante, tanto para evitar la escritura de resultados intermedios, como para evitar la impresión de grandes cantidades de números cuando se trabaja con matrices de gran tamaño. A semejanza de C, MATLAB distingue
+
+  --- Top 5 (Chunk 168 | Score 0.3421) ---
+  posteriormente). MATLAB determina el número de filas y de columnas en función del número de elementos que se proporcionan (o se utilizan). Las matrices se definen o introducen por filas6; los elementos de una misma fila están separados por blancos o comas, mientras que las filas están separadas por pulsaciones intro o por caracteres punto y coma (;). Por ejemplo, el siguiente comando define una matriz A de dimensión (3×3): >> A=[1 2 3; 4 5 6; 7 8 9] La respuesta del programa es
+
+======================================================
+PREGUNTA 4: ¿Cómo se calcula la matriz inversa con inv y la matriz traspuesta?
+RESPUESTA (Chunk #193 | Puntuacion BERT: 0.6649):
+en la forma correspondiente a la traspuesta de la ecuación (1): yB = c (3) donde y y c son vectores fila (c conocido). Si la matriz B es cuadrada e invertible, la solución de este sistema se puede escribir en las formas siguientes: y = c*inv(B) (4a) y = c/B (4b) En este caso, el operador división-derecha por una matriz (/) equivale a postmultiplicar por la inversa de la matriz. Si se traspone la ecuación (3) y se halla la solución aplicando el operador
+
+  --- Top 1 (Chunk 193 | Score 0.6649) ---
+  en la forma correspondiente a la traspuesta de la ecuación (1): yB = c (3) donde y y c son vectores fila (c conocido). Si la matriz B es cuadrada e invertible, la solución de este sistema se puede escribir en las formas siguientes: y = c*inv(B) (4a) y = c/B (4b) En este caso, el operador división-derecha por una matriz (/) equivale a postmultiplicar por la inversa de la matriz. Si se traspone la ecuación (3) y se halla la solución aplicando el operador
+
+  --- Top 2 (Chunk 308 | Score 0.5577) ---
+  (A = LU) de una matriz. La matriz L es una permutación de una matriz triangular inferior (dicha permutación es consecuencia del pivotamiento por columnas utilizado en la factorización) calcula la inversa de A. Equivale a B=inv(U)*inv(L) devuelve el determinante d de la matriz cuadrada A. Equivale a d=det(L)*det(U) reducción a forma de escalón (mediante la eliminación de Gauss con pivotamiento por columnas, haciendo ceros también encima de los pivots) de una matriz rectangular A reducción a forma de escalón con un vector xc que
+
+  --- Top 3 (Chunk 221 | Score 0.4597) ---
+  = 1.0000 + 2.0000i Es importante advertir que el operador de matriz traspuesta ('), aplicado a matrices complejas, produce la matriz conjugada y traspuesta. Existe una función que permite hallar la matriz conjugada (conj( )) y el operador punto y apóstrofo (.') que calcula simplemente la matriz traspuesta. 3.3.4. CADENAS DE CARACTERES MATLAB puede definir variables que contengan cadenas de caracteres. En MATLAB las cadenas de texto van entre apóstrofos o comillas simples (Nótese que en C van entre comillas dobles: "cadena"). Por ejemplo, en
+
+  --- Top 4 (Chunk 892 | Score 0.4484) ---
+  A=rand(100,100); colormap(hot); pcolor(A); pause(5), pcolor(inv(A)); donde el comando pause(5) simplemente introduce un pausa de 5 seg en la ejecución. Al ejecutar todos los comandos en la misma línea es necesario poner pause pues si no dibuja directamente la inversa sin pasar por la matriz inicial. Si todavía se conservan las matrices Z y W que se han definido previamente, se pueden hacer algunas pruebas cambiando el mapa de colores. La función caxis permite ajustar manualmente la escala de colores. Su forma general es: caxis([cmin, cmax])
+
+  --- Top 5 (Chunk 175 | Score 0.4482) ---
+  Invertir una matriz es casi tan fácil como trasponerla. A continuación se va a definir una nueva matriz A -no singularen la forma: >> A=[1 4 -3; 2 1 5; -2 5 3] A = 1 4 -3 2 1 5 -2 5 3 Ahora se va a calcular la inversa de A y el resultado se asignará a B. Para ello basta hacer uso de la función inv( ) (la precisión o número de cifras con que se muestra el resultado se puede cambiar
+
+======================================================
+PREGUNTA 5: ¿Qué diferencia hay entre la multiplicación matricial * y el producto elemento a elemento .*?
+RESPUESTA (Chunk #180 | Puntuacion BERT: 0.6841):
+detenimiento. 3.2. Operaciones con matrices 3.2.1. OPERADORES ARITMÉTICOS MATLAB puede operar con matrices por medio de operadores y por medio de funciones. Se han visto ya los operadores suma (+), producto (*) y traspuesta ('), así como la función invertir inv( ). Los operadores matriciales de MATLAB son los siguientes: + adición o suma – sustracción o resta * multiplicación ' traspuesta ^ potenciación \ división-izquierda / división-derecha .* producto elemento a elemento ./ y .\ división elemento a elemento .^ elevar a una potencia
+
+  --- Top 1 (Chunk 180 | Score 0.6841) ---
+  detenimiento. 3.2. Operaciones con matrices 3.2.1. OPERADORES ARITMÉTICOS MATLAB puede operar con matrices por medio de operadores y por medio de funciones. Se han visto ya los operadores suma (+), producto (*) y traspuesta ('), así como la función invertir inv( ). Los operadores matriciales de MATLAB son los siguientes: + adición o suma – sustracción o resta * multiplicación ' traspuesta ^ potenciación \ división-izquierda / división-derecha .* producto elemento a elemento ./ y .\ división elemento a elemento .^ elevar a una potencia
+
+  --- Top 2 (Chunk 181 | Score 0.3564) ---
+  ' traspuesta ^ potenciación \ división-izquierda / división-derecha .* producto elemento a elemento ./ y .\ división elemento a elemento .^ elevar a una potencia elemento a elemento Estos operadores se aplican también a las variables o valores escalares, aunque con algunas diferencias7. Todos estos operadores son coherentes con las correspondientes operaciones matriciales: no se puede por ejemplo sumar matrices que no sean del mismo tamaño. Si los operadores no se usan de modo correcto se obtiene un mensaje de error. Los operadores anteriores se
+
+  --- Top 3 (Chunk 194 | Score 0.2732) ---
+  matriz (/) equivale a postmultiplicar por la inversa de la matriz. Si se traspone la ecuación (3) y se halla la solución aplicando el operador división-izquierda se obtiene: y' = (B')\c' (5) Comparando las expresiones (4b) y (5) se obtiene la relación entre los operadores división-izquierda y división-derecha (MATLAB sólo tiene implementado el operador división-izquierda): c/B = ((B')\c')' (6) 3.2.3. OPERADORES ELEMENTO A ELEMENTO En MATLAB existe también la posibilidad de aplicar elemento a elemento los operadores matriciales (*, ^, \ y /). Para ello
+
+  --- Top 4 (Chunk 300 | Score 0.2295) ---
+  los elementos de un vector (cada elemento del resultado es una suma de elementos del original) mean(x) valor medio de los elementos de un vector std(x) desviación típica prod(x) producto de los elementos de un vector cumprod(x) devuelve el vector producto acumulativo de los elementos de un vector [y,i]=sort(x) ordenación de menor a mayor de los elementos de un vector x. Devuelve el vector ordenado y, y un vector i con las posiciones iniciales en x de los elementos en el vector ordenado y. En
+
+  --- Top 5 (Chunk 41 | Score 0.2291) ---
+  tercera lí- 2 Al invertir la matriz y al hacer el producto posterior se han introducido pequeños errores numéricos de redondeo en el resultado, lo cual hace que no todos los elementos cero del resultado aparezcan de la misma forma. nea calcula los Megaflops por segundo, para lo cual utiliza la función etime() que calcula el tiempo transcurrido entre dos instantes definidos por dos llamadas a la función clock3: >> n=1000; A=rand(n); B=rand(n); C=zeros(n); >> tini=clock; C=B*A; tend=clock; mflops=(2*n^3)/1000000; >> mflops/etime(tend,tini) Otro de los puntos
+
+======================================================
+PREGUNTA 6: ¿Cómo se genera un vector con valores igualmente espaciados usando linspace o logspace?
+RESPUESTA (Chunk #233 | Puntuacion BERT: 0.6812):
+orientadas a definir con gran facilidad matrices de tipos particulares. Algunas de estas funciones son las siguientes: eye(4) forma la matriz unidad de tamaño (4×4) zeros(3,5) forma una matriz de ceros de tamaño (3×5) zeros(4) ídem de tamaño (4×4) ones(3) forma una matriz de unos de tamaño (3×3) ones(2,4) idem de tamaño (2×4) linspace(x1,x2,n) genera un vector con n valores igualmente espaciados entre x1 y x2 logspace(d1,d2,n) genera un vector con n valores espaciados logarítmicamente entre 10^d1 y 10^d2. Si d2 es pi9, los puntos
+
+  --- Top 1 (Chunk 233 | Score 0.6812) ---
+  orientadas a definir con gran facilidad matrices de tipos particulares. Algunas de estas funciones son las siguientes: eye(4) forma la matriz unidad de tamaño (4×4) zeros(3,5) forma una matriz de ceros de tamaño (3×5) zeros(4) ídem de tamaño (4×4) ones(3) forma una matriz de unos de tamaño (3×3) ones(2,4) idem de tamaño (2×4) linspace(x1,x2,n) genera un vector con n valores igualmente espaciados entre x1 y x2 logspace(d1,d2,n) genera un vector con n valores espaciados logarítmicamente entre 10^d1 y 10^d2. Si d2 es pi9, los puntos
+
+  --- Top 2 (Chunk 234 | Score 0.6409) ---
+  igualmente espaciados entre x1 y x2 logspace(d1,d2,n) genera un vector con n valores espaciados logarítmicamente entre 10^d1 y 10^d2. Si d2 es pi9, los puntos se generan entre 10^d1 y pi forma una matriz de números aleatorios entre 0 y 1, con distribución uniforme, de tamaño (3×3) idem de tamaño (2×5) forma una matriz de números aleatorios de tamaño (4×4), con distribución normal, de valor medio 0 y varianza 1. crea una matriz (4×4) con los números 1, 2, ... 4*4, con la propiedad de
+
+  --- Top 3 (Chunk 613 | Score 0.3193) ---
+  grid disp('Ya he terminado') En estos comandos tspan es un vector que define el intervalo temporal de integración. Es muy importante que en la función ode45, el vector de condiciones iniciales y0 sea un vector columna. El vector t devuelto por ode45 contiene los valores del tiempo para los cuales se ha calculado la posición y velocidad. Dichos valores son controlados por la función ode45 y no por el usuario, por lo que de ordinario no estarán igualmente espaciados. La matriz de resultados Y contiene
+
+  --- Top 4 (Chunk 665 | Score 0.2575) ---
+  función del número de valores de retorno que espera recibir el usuario. 13. Cuando el resultado del integrador se recibe por medio de una estructura, los instantes en los que se proporcionan resultados no coinciden con los valores intermedios de tspan, sino que son valores elegidos por el integrador, al igual que en el caso en que tspan sólo contenga el instante inicial y el final (tspan=[tini, tend];). Si se desean resultados en intervalos igualmente espaciados elegidos por el usuario, puede utilizarse la función deval
+
+  --- Top 5 (Chunk 614 | Score 0.2501) ---
+  controlados por la función ode45 y no por el usuario, por lo que de ordinario no estarán igualmente espaciados. La matriz de resultados Y contiene cuatro columnas (las dos velocidades y las dos coordenadas de cada posición) y tantas filas como elementos tiene el vector t. En la Figura 32 se muestra el resultado del ejemplo anterior (posición vertical en función del tiempo). Figura 32. Tiro parabólico (posición vertical MATLAB dispone de varias funciones para la integraen función del tiempo). ción de sistemas de ecuaciones
+
+======================================================
+PREGUNTA 7: ¿Cómo se crea una matriz componiendo submatrices o accediendo a sus elementos con subíndices?
+RESPUESTA (Chunk #244 | Puntuacion BERT: 0.4783):
+vector formado por las columnas de A puestas una a continuación de otra. Si la matriz A tiene menos de m×n elementos se produce un error. Un caso especialmente interesante es el de crear una nueva matriz componiendo como submatrices otras matrices definidas previamente. A modo de ejemplo, ejecútense las siguientes líneas de comandos y obsérvense los resultados obtenidos: >> A=rand(3) >> B=diag(diag(A)) >> C=[A, eye(3); zeros(3), B] En el ejemplo anterior, la matriz C de tamaño (6×6) se forma por composición de cuatro matrices
+
+  --- Top 1 (Chunk 244 | Score 0.4783) ---
+  vector formado por las columnas de A puestas una a continuación de otra. Si la matriz A tiene menos de m×n elementos se produce un error. Un caso especialmente interesante es el de crear una nueva matriz componiendo como submatrices otras matrices definidas previamente. A modo de ejemplo, ejecútense las siguientes líneas de comandos y obsérvense los resultados obtenidos: >> A=rand(3) >> B=diag(diag(A)) >> C=[A, eye(3); zeros(3), B] En el ejemplo anterior, la matriz C de tamaño (6×6) se forma por composición de cuatro matrices
+
+  --- Top 2 (Chunk 241 | Score 0.2887) ---
+  una matriz diagonal A cuyos elementos diagonales son los elementos de un vector ya existente x forma un vector x a partir de los elementos de la diagonal de una matriz ya existente A diag(diag(A)) crea una matriz diagonal a partir de la diagonal de la matriz A blkdiag(A,B) crea una matriz diagonal de submatrices a partir de las matrices que se le pasan como argumentos forma una matriz triangular superior a partir de una matriz A (no tiene por qué ser cuadrada). Con un
+
+  --- Top 3 (Chunk 369 | Score 0.2403) ---
+  = 1 2 3 4 5 6 >> AA(:,:,2)=[2 3 4; 5 6 7] % se añade una segunda matriz AA(:,:,1) = 1 2 3 4 5 6 AA(:,:,2) = 2 3 4 5 6 7 k 5.2.2. FUNCIONES QUE TRABAJAN CON HIPERMATRICES Algunas funciones de MATLAB para generar matrices admiten más de dos subíndices y pueden ser utilizadas para generar hipermatrices. Entre ellas están rand(), randn(), zeros() y ones(). Por ejemplo, véase la siguiente sentencia y su resultado: >> BB=randn(2,3,2) BB(:,:,1) = -0.4326 0.1253
+
+  --- Top 4 (Chunk 246 | Score 0.2272) ---
+  comas. Los tamaños de las submatrices deben de ser coherentes. x=diag(A) triu(A) tril(A) rot90(A,k) 3.5.3. DIRECCIONAMIENTO DE VECTORES Y MATRICES A PARTIR DE VECTORES Los elementos de un vector x se pueden direccionar a partir de los de otro vector v. En este caso, x(v) equivale al vector x(v(1)), x(v(2)), ... Considérese el siguiente ejemplo: >> v=[1 3 4] v = 1 3 4 >> x=rand(1,6) x = 0.5899 0.4987 0.7351 0.9231 0.1449 0.9719 >> x(v) ans = 0.5899 0.7351 0.9231 De forma análoga, los
+
+  --- Top 5 (Chunk 245 | Score 0.2083) ---
+  A=rand(3) >> B=diag(diag(A)) >> C=[A, eye(3); zeros(3), B] En el ejemplo anterior, la matriz C de tamaño (6×6) se forma por composición de cuatro matrices de tamaño (3×3). Al igual que con simples escalares, las submatrices que forman una fila se separan con blancos o comas, mientras que las diferentes filas se separan entre sí con intros o puntos y comas. Los tamaños de las submatrices deben de ser coherentes. x=diag(A) triu(A) tril(A) rot90(A,k) 3.5.3. DIRECCIONAMIENTO DE VECTORES Y MATRICES A PARTIR DE VECTORES Los
+
+======================================================
+PREGUNTA 8: ¿Para qué sirven los comandos who, whos y clear en el espacio de trabajo?
+RESPUESTA (Chunk #105 | Puntuacion BERT: 0.6693):
+'c:\Matlab' 'c:\Temp' borra del Path los dos directorios indicados. 2.5.6. WORKSPACE BROWSER Y ARRAY EDITOR El espacio de trabajo de MATLAB (Workspace) es el conjunto de variables y de funciones de usuario que en un determinado momento están definidas en la memoria del programa o de la función que se está jecutando. Para obtener información sobre el Workspace desde la línea de comandos se pueden utilizar los comandos who y whos. El segundo proporciona una información más detallada que el primero. Por ejemplo, una salida
+
+  --- Top 1 (Chunk 105 | Score 0.6693) ---
+  'c:\Matlab' 'c:\Temp' borra del Path los dos directorios indicados. 2.5.6. WORKSPACE BROWSER Y ARRAY EDITOR El espacio de trabajo de MATLAB (Workspace) es el conjunto de variables y de funciones de usuario que en un determinado momento están definidas en la memoria del programa o de la función que se está jecutando. Para obtener información sobre el Workspace desde la línea de comandos se pueden utilizar los comandos who y whos. El segundo proporciona una información más detallada que el primero. Por ejemplo, una salida
+
+  --- Top 2 (Chunk 229 | Score 0.6690) ---
+  una relación de las variables que se han utilizado en una sesión de trabajo se puede utilizar el comando who. Existe otro comando llamado whos que proporciona además información sobre el tamaño, la cantidad de memoria ocupada y el carácter real o complejo de cada variable. Se sugiere utilizar de vez en cuando estos comandos en la sesión de MATLAB que se tiene abierta. Esta misma información se puede obtener gráficamente con el Workspace Browser, que aparece con el comando View/Workspace o activando la ventana
+
+  --- Top 3 (Chunk 228 | Score 0.6125) ---
+  por este número máximo de caracteres. El carácter guión bajo (_) se considera como una letra. A diferencia del lenguaje C, no hace falta declarar las variables que se vayan a utilizar. Esto hace que se deba tener especial cuidado con no utilizar nombres erróneos en las variables, porque no se recibirá ningún aviso del ordenador. Cuando se quiere tener una relación de las variables que se han utilizado en una sesión de trabajo se puede utilizar el comando who. Existe otro comando llamado whos
+
+  --- Top 4 (Chunk 106 | Score 0.5641) ---
+  línea de comandos se pueden utilizar los comandos who y whos. El segundo proporciona una información más detallada que el primero. Por ejemplo, una salida típica del comando whos es la siguiente: >> whos Name Size Bytes Class A 3x3 72 double array B 3x3 72 double array C 3x3 72 double array D 3x3 72 double array Grand total is 36 elements using 288 bytes 4 El comando path dentro del paréntesis de la función devuelve la lista de directorios anterior. Éstas son las
+
+  --- Top 5 (Chunk 502 | Score 0.3844) ---
+  Las variables persistent se inicializan a la matriz vacía [] y permanecen en memoria hasta que se hace clear de la función o cuando se modifica el fichero-M. Para evitar que un fichero-M se modifique se puede utilizar el comando mlock file.m, que impide la modificación del fichero. El comando munlock desbloquea el fichero mientras que la función mislocked permite saber si está bloqueado o no. 6.3.11. VARIABLES GLOBALES Las variables globales son visibles en todas las funciones (y en el espacio de trabajo base
+
+======================================================
+PREGUNTA 9: ¿Cuál es la sintaxis de la sentencia for para ejecutar un bucle un número predeterminado de veces?
+RESPUESTA (Chunk #443 | Puntuacion BERT: 0.6288):
+de C/C++/Java16, en MATLAB sólo se ejecuta uno de los bloques relacionado con un case. 6.1.3. SENTENCIA FOR La sentencia for repite un conjunto de sentencias un número predeterminado de veces. La sentencia for de MATLAB es muy diferente y no tiene la generalidad de la sentencia for de C/C++/Java. La siguiente construcción ejecuta sentencias con valores de i de 1 a n, variando de uno en uno. for i=1:n sentencias end o bien, for i=vectorValores sentencias end donde vectorValores es un vector con los
+
+  --- Top 1 (Chunk 443 | Score 0.6288) ---
+  de C/C++/Java16, en MATLAB sólo se ejecuta uno de los bloques relacionado con un case. 6.1.3. SENTENCIA FOR La sentencia for repite un conjunto de sentencias un número predeterminado de veces. La sentencia for de MATLAB es muy diferente y no tiene la generalidad de la sentencia for de C/C++/Java. La siguiente construcción ejecuta sentencias con valores de i de 1 a n, variando de uno en uno. for i=1:n sentencias end o bien, for i=vectorValores sentencias end donde vectorValores es un vector con los
+
+  --- Top 2 (Chunk 447 | Score 0.4296) ---
+  iteración el valor de una de las columnas de A. Cuando se introducen interactivamente en la línea de comandos, los bucles for se ejecutan sólo después de introducir la sentencia end que los completa. 6.1.4. SENTENCIA WHILE La estructura del bucle while es muy similar a la de C/C++/Java. Su sintaxis es la siguiente: while condicion sentencias end donde condicion puede ser una expresión vectorial o matricial. Las sentencias se siguen ejecutando mientras haya elementos distintos de cero en condicion, es decir, mientras haya algún
+
+  --- Top 3 (Chunk 446 | Score 0.3039) ---
+  valores): for i=1:m for j=1:n sentencias end end Una última forma de interés del bucle for es la siguiente (A es una matriz): for i=A sentencias end 16 En C se ejecuta el caso seleccionado y todos los siguientes, salvo que se utilice la sentencia break. en la que la variable i es un vector que va tomando en cada iteración el valor de una de las columnas de A. Cuando se introducen interactivamente en la línea de comandos, los bucles for se ejecutan sólo
+
+  --- Top 4 (Chunk 842 | Score 0.2809) ---
+  depende del tamaño de la ventana, pero no de la complejidad del dibujo. La función moviein(n) reserva memoria para almacenar n frames. La siguiente lista de comandos crearía una película de 17 imágenes o frames, que se almacenarán como las columnas de la matriz M: M = moviein(17); x=[-2*pi:0.1:2*pi]'; for j=1:17 y=sin(x+j*pi/8); plot(x,y); M(:,j) = getframe; end Una vez creada la película se puede representar el número de veces que se desee con el comando movie. Por ejemplo, para representar 10 veces la película anterior,
+
+  --- Top 5 (Chunk 431 | Score 0.2767) ---
+  C/C++/Java el "cuerpo" de estas sentencias se determinaba mediante llaves {...}, en MATLAB se utiliza la palabra end con análoga finalidad. Existen también algunas otras diferencias de sintaxis. false Condición Sentencias true Condición Sentencias true false Figura 30. Bucles con control al principio y al final. La Figura 30 muestra dos posibles formas de bucle, con el control situado al principio o al final del mismo. Si el control está situado al comienzo del bucle es posible que las sentencias no se ejecuten ninguna vez,
+
+======================================================
+PREGUNTA 10: ¿Cuál es la estructura y sintaxis de la sentencia while ... end?
+RESPUESTA (Chunk #447 | Puntuacion BERT: 0.6261):
+iteración el valor de una de las columnas de A. Cuando se introducen interactivamente en la línea de comandos, los bucles for se ejecutan sólo después de introducir la sentencia end que los completa. 6.1.4. SENTENCIA WHILE La estructura del bucle while es muy similar a la de C/C++/Java. Su sintaxis es la siguiente: while condicion sentencias end donde condicion puede ser una expresión vectorial o matricial. Las sentencias se siguen ejecutando mientras haya elementos distintos de cero en condicion, es decir, mientras haya algún
+
+  --- Top 1 (Chunk 447 | Score 0.6261) ---
+  iteración el valor de una de las columnas de A. Cuando se introducen interactivamente en la línea de comandos, los bucles for se ejecutan sólo después de introducir la sentencia end que los completa. 6.1.4. SENTENCIA WHILE La estructura del bucle while es muy similar a la de C/C++/Java. Su sintaxis es la siguiente: while condicion sentencias end donde condicion puede ser una expresión vectorial o matricial. Las sentencias se siguen ejecutando mientras haya elementos distintos de cero en condicion, es decir, mientras haya algún
+
+  --- Top 2 (Chunk 449 | Score 0.4511) ---
+  ejecución del bucle for y/o while más interno de los que comprenden a dicha sentencia. 6.1.6. SENTENCIA CONTINUE La sentencia continue hace que se pase inmediatamente a la siguiente iteración del bucle for o while, saltando todas las sentencias que hay entre el continue y el fin del bucle en la iteración actual. 6.1.7. SENTENCIAS TRY...CATCH...END La construcción try...catch...end permite gestionar los errores que se pueden producir en tiempo de ejecución. Su forma es la siguiente: try sentencias1 catch sentencias2 end En el caso de
+
+  --- Top 3 (Chunk 431 | Score 0.3693) ---
+  C/C++/Java el "cuerpo" de estas sentencias se determinaba mediante llaves {...}, en MATLAB se utiliza la palabra end con análoga finalidad. Existen también algunas otras diferencias de sintaxis. false Condición Sentencias true Condición Sentencias true false Figura 30. Bucles con control al principio y al final. La Figura 30 muestra dos posibles formas de bucle, con el control situado al principio o al final del mismo. Si el control está situado al comienzo del bucle es posible que las sentencias no se ejecuten ninguna vez,
+
+  --- Top 4 (Chunk 432 | Score 0.3069) ---
+  principio o al final del mismo. Si el control está situado al comienzo del bucle es posible que las sentencias no se ejecuten ninguna vez, por no haberse cumplido la condición cuando se llega al bucle por primera vez. Sin embargo, si la condición está al final del bucle las sentencias se ejecutarán por lo menos una vez, aunque la condición no se cumpla. Muchos lenguajes de programación disponen de bucles con control al principio (for y while en C/C++/Java) y al final (do ...
+
+  --- Top 5 (Chunk 448 | Score 0.2849) ---
+  puede ser una expresión vectorial o matricial. Las sentencias se siguen ejecutando mientras haya elementos distintos de cero en condicion, es decir, mientras haya algún o algunos elementos true. El bucle se termina cuando todos los elementos de condicion son false (es decir, cero). 6.1.5. SENTENCIA BREAK Al igual que en C/C++/Java, la sentencia break hace que se termine la ejecución del bucle for y/o while más interno de los que comprenden a dicha sentencia. 6.1.6. SENTENCIA CONTINUE La sentencia continue hace que se pase
+
+======================================================
+PREGUNTA 11: ¿Cómo se utilizan las sentencias condicionales if, elseif y else?
+RESPUESTA (Chunk #435 | Puntuacion BERT: 0.5798):
+desea)15: if condicion sentencias end Existe también la bifurcación múltiple, en la que pueden concatenarse tantas condiciones como se desee, y que tiene la forma: if condicion1 bloque1 elseif condicion2 bloque2 elseif condicion3 bloque3 else % opción por defecto para cuando no se cumplan las condiciones 1,2,3 bloque4 end donde la opción por defecto else puede ser omitida: si no está presente no se hace nada en caso de que no se cumpla ninguna de las condiciones que se han chequeado. Una observación muy importante:
+
+  --- Top 1 (Chunk 435 | Score 0.5798) ---
+  desea)15: if condicion sentencias end Existe también la bifurcación múltiple, en la que pueden concatenarse tantas condiciones como se desee, y que tiene la forma: if condicion1 bloque1 elseif condicion2 bloque2 elseif condicion3 bloque3 else % opción por defecto para cuando no se cumplan las condiciones 1,2,3 bloque4 end donde la opción por defecto else puede ser omitida: si no está presente no se hace nada en caso de que no se cumpla ninguna de las condiciones que se han chequeado. Una observación muy importante:
+
+  --- Top 2 (Chunk 439 | Score 0.5390) ---
+  matriciales. Por ejemplo, la función isequal(A, B) devuelve un uno si las dos matrices son idénticas y un cero en caso de que difieran en algo. 6.1.2. SENTENCIA SWITCH La sentencia switch realiza una función análoga a un conjunto de if...elseif concatenados. Su forma general es la siguiente: 15 En los ejemplos siguientes las sentencias aparecen desplazadas hacia la derecha respecto al if, else o end. Esto se hace así para que el programa resulte más legible, resultando más fácil ver dónde empieza y termina
+
+  --- Top 3 (Chunk 484 | Score 0.4835) ---
+  hay que dar valor a sus elementos antes de salir de la función. Recuérdese también que las variables nargin y nargout indican el número de argumentos y de valores de retorno con que ha sido llamada la función. A continuación se presenta un ejemplo sencillo: obsérvese el código de la siguiente función atan3: function varargout=atan3(varargin) if nargin==1 rad = atan(varargin{1}); elseif nargin==2 rad = atan2(varargin{1},varargin{2}); else disp('Error: más de dos argumentos') return end varargout{1}=rad; if nargout>1 varargout{2}=rad*180/pi; end MATLAB (y muchos otros lenguajes de programación)
+
+  --- Top 4 (Chunk 485 | Score 0.4118) ---
+  elseif nargin==2 rad = atan2(varargin{1},varargin{2}); else disp('Error: más de dos argumentos') return end varargout{1}=rad; if nargout>1 varargout{2}=rad*180/pi; end MATLAB (y muchos otros lenguajes de programación) dispone de dos funciones, llamadas atan y atan2, para calcular el arco cuya tangente tiene un determinado valor. El resultado de dichas funciones está expresado en radianes. La función atan recibe un único argumento, con lo cual el arco que devuelve está comprendido entre –π/2 y +π/2 (entre –90o y 90o), porque por ejemplo un arco de 45o es indistinguible
+
+  --- Top 5 (Chunk 749 | Score 0.2375) ---
+  interface entre C y MATLAB: // fichero prodVectC.c #include "mex.h" void prodVectC(const double* a, const double* b, double* c) { c[0] = a[1]*b[2]-a[2]*b[1]; c[1] = a[2]*b[0]-a[0]*b[2]; c[2] = a[0]*b[1]-a[1]*b[0]; } // This function will be called by Matlab in the form c = prodVectC(a,b); void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) { double *a, *b; // inputs double *c; // outputs // Check for proper number of arguments if(nrhs != 2) { mexErrMsgTxt("Error in number of inputs."); } else if (nlhs !=
+
+======================================================
+PREGUNTA 12: ¿Para qué sirve la bifurcación múltiple switch, case y otherwise?
+RESPUESTA (Chunk #440 | Puntuacion BERT: 0.6264):
+respecto al if, else o end. Esto se hace así para que el programa resulte más legible, resultando más fácil ver dónde empieza y termina la bifurcación o el bucle. Es muy recomendable seguir esta práctica de programación. switch switch_expresion case case_expr1, bloque1 case {case_expr2, case_expr3, case_expr4,...} bloque2 ... otherwise, % opción por defecto bloque3 end Al principio se evalúa la switch_expresion, cuyo resultado debe ser un número escalar o una cadena de caracteres. Este resultado se compara con las case_expr, y se ejecuta el
+
+  --- Top 1 (Chunk 440 | Score 0.6264) ---
+  respecto al if, else o end. Esto se hace así para que el programa resulte más legible, resultando más fácil ver dónde empieza y termina la bifurcación o el bucle. Es muy recomendable seguir esta práctica de programación. switch switch_expresion case case_expr1, bloque1 case {case_expr2, case_expr3, case_expr4,...} bloque2 ... otherwise, % opción por defecto bloque3 end Al principio se evalúa la switch_expresion, cuyo resultado debe ser un número escalar o una cadena de caracteres. Este resultado se compara con las case_expr, y se ejecuta el
+
+  --- Top 2 (Chunk 640 | Score 0.2890) ---
+  llamar a odeplot status=0; switch flag case 'init' disp(['Entrando en salidaTiropar3 por primera vez']); odeplot(t,y,'init'); case 'done' disp(['Entrando en salidaTiropar3 por última vez']); odeplot([],[],'done'); case '' % puede haber resultados para más de un tiempo de salida for i=1:length(t) disp(['Entrando en salidaTiropar4 para t=',num2str(t(i))]); odeplot(t(i),y(:,i)); end end 53. % funcion para controlar los eventos 54. function [valor,esFinal,direccion]=tiropar3Eventos(t,y,m,c) 55. if y(2)>0 56. valor = y(4); % unico valor que se controla 57. esFinal = 0; % no termina la integración al llegar al suelo 58. direccion
+
+  --- Top 3 (Chunk 639 | Score 0.2633) ---
+  T=tspan(find(tspan<sol.xe(2))); % la funcion deval calcula la solucion en los tiempos deseados Y=deval(sol,T); % forma alternativa de llamar al integrador disp('Ya he terminado!') % calculo de la matriz de masas function M=tiropar3Masa(t,m,c) M=diag([m,m,1,1]); % función para controlar la salida de resultados function status=tiropar3Salida(t,y,flag,m,c) % se llama a tiropar3Salida() en cada punto de salida y % esta función se encarga de llamar a odeplot status=0; switch flag case 'init' disp(['Entrando en salidaTiropar3 por primera vez']); odeplot(t,y,'init'); case 'done' disp(['Entrando en salidaTiropar3 por última vez']); odeplot([],[],'done'); case
+
+  --- Top 4 (Chunk 434 | Score 0.2494) ---
+  de programas o de ficheros *.m. También se aplican con frecuencia en el uso interactivo de MATLAB, como se verá más adelante en algunos ejemplos. 6.1.1. SENTENCIA IF En su forma más simple, la sentencia if se escribe en la forma siguiente (obsérvese que –a diferencia de C/C++/Java– la condición no va entre paréntesis, aunque se pueden poner si se desea)15: if condicion sentencias end Existe también la bifurcación múltiple, en la que pueden concatenarse tantas condiciones como se desee, y que tiene la forma:
+
+  --- Top 5 (Chunk 435 | Score 0.2472) ---
+  desea)15: if condicion sentencias end Existe también la bifurcación múltiple, en la que pueden concatenarse tantas condiciones como se desee, y que tiene la forma: if condicion1 bloque1 elseif condicion2 bloque2 elseif condicion3 bloque3 else % opción por defecto para cuando no se cumplan las condiciones 1,2,3 bloque4 end donde la opción por defecto else puede ser omitida: si no está presente no se hace nada en caso de que no se cumpla ninguna de las condiciones que se han chequeado. Una observación muy importante:
+
+======================================================
+PREGUNTA 13: ¿Cómo se dibuja una gráfica en 2D con la función plot y grid?
+RESPUESTA (Chunk #777 | Puntuacion BERT: 0.6901):
+la ventana gráfica activa anterior >> grid % se crea una ventana con una cuadrícula >> plot(x,y) % se dibuja la función seno borrando la cuadrícula Se puede observar la diferencia con la secuencia que sigue: >> close >> plot(x,y) % se crea una ventana y se dibuja la función seno >> grid % se añade la cuadrícula sin borrar la función seno En el primer caso MATLAB ha creado la cuadrícula en una ventana nueva y luego la ha borrado al ejecutar la función
+
+  --- Top 1 (Chunk 777 | Score 0.6901) ---
+  la ventana gráfica activa anterior >> grid % se crea una ventana con una cuadrícula >> plot(x,y) % se dibuja la función seno borrando la cuadrícula Se puede observar la diferencia con la secuencia que sigue: >> close >> plot(x,y) % se crea una ventana y se dibuja la función seno >> grid % se añade la cuadrícula sin borrar la función seno En el primer caso MATLAB ha creado la cuadrícula en una ventana nueva y luego la ha borrado al ejecutar la función
+
+  --- Top 2 (Chunk 776 | Score 0.6637) ---
+  ninguna abierta, sustituyendo cualquier cosa que hubiera dibujada anteriormente en esa ventana. Para verlo, se comenzará creando un par de vectores x e y con los que trabajar: >> x=[-10:0.2:10]; y=sin(x); Ahora se deben ejecutar los comandos siguientes (se comienza cerrando la ventana activa, para que al crear la nueva ventana aparezca en primer plano): >> close % se cierra la ventana gráfica activa anterior >> grid % se crea una ventana con una cuadrícula >> plot(x,y) % se dibuja la función seno borrando la
+
+  --- Top 3 (Chunk 857 | Score 0.6397) ---
+  dejar las explicaciones detalladas para un poco más adelante. La primera forma de gráfico 3D es la función plot3, que es el análogo tridimensional de la función plot. Esta función dibuja puntos cuyas coordenadas están contenidas en 3 vectores, bien uniéndolos mediante una línea continua (defecto), bien mediante markers. Asegúrese de que no hay ninguna ventana gráfica abierta y ejecute el siguiente comando que dibuja una línea espiral en color rojo: >> fi=[0:pi/20:6*pi]; plot3(cos(fi),sin(fi),fi,'r'), grid Ahora se verá cómo se representa una función de dos
+
+  --- Top 4 (Chunk 775 | Score 0.6062) ---
+  ejemplo: >> v = text(1,.0,'seno') v = 76.0001 plotyy() legend() grid >> delete(v) Los dos grupos de funciones anteriores no actúan de la misma forma. Así, la función plot dibuja una nueva figura en la ventana activa (en todo momento MATLAB tiene una ventana activa de entre todos las ventanas gráficas abiertas), o abre una nueva figura si no hay ninguna abierta, sustituyendo cualquier cosa que hubiera dibujada anteriormente en esa ventana. Para verlo, se comenzará creando un par de vectores x e y con
+
+  --- Top 5 (Chunk 822 | Score 0.4956) ---
+  cada una de ellas en particular, utilizar help nombre_función): bar() crea diagramas de barras barh() diagramas de barras horizontales bar3() diagramas de barras con aspecto 3-D bar3h() diagramas de barras horizontales con aspecto 3-D pie() gráficos con forma de “tarta” pie3() gráficos con forma de “tarta” y aspecto 3-D area() similar plot(), pero rellenando en ordenadas de 0 a y stairs() función análoga a bar() sin líneas internas errorbar() representa sobre una gráfica –mediante barras– valores de errores compass() dibuja los elementos de un vector
+
+======================================================
+PREGUNTA 14: ¿Cómo se añaden título y etiquetas a los ejes con title, xlabel, ylabel y text?
+RESPUESTA (Chunk #771 | Puntuacion BERT: 0.6797):
+hará referencia casi exclusiva a la primera de estas funciones (plot). Las demás se pueden utilizar de un modo similar. Existen además otras funciones orientadas a añadir títulos al gráfico, a cada uno de los ejes, a dibujar una cuadrícula auxiliar, a introducir texto, etc. Estas funciones son las siguientes: title('título') añade un título al dibujo xlabel('tal') añade una etiqueta al eje de abscisas. Con xlabel off desaparece ylabel('cual') añade una etiqueta al eje de ordenadas. Con ylabel off desaparece text(x,y,'texto') introduce 'texto' en el
+
+  --- Top 1 (Chunk 771 | Score 0.6797) ---
+  hará referencia casi exclusiva a la primera de estas funciones (plot). Las demás se pueden utilizar de un modo similar. Existen además otras funciones orientadas a añadir títulos al gráfico, a cada uno de los ejes, a dibujar una cuadrícula auxiliar, a introducir texto, etc. Estas funciones son las siguientes: title('título') añade un título al dibujo xlabel('tal') añade una etiqueta al eje de abscisas. Con xlabel off desaparece ylabel('cual') añade una etiqueta al eje de ordenadas. Con ylabel off desaparece text(x,y,'texto') introduce 'texto' en el
+
+  --- Top 2 (Chunk 817 | Score 0.3397) ---
+  de ellas en la ventana activa. El comando figure(gcf) (get current figure) permite hacer visible la ventana de gráficos desde la ventana de comandos. >> x=[-4*pi:pi/20:4*pi]; >> plot(x,sin(x),'r',x,cos(x),'g') >> title('Función seno(x) -en rojoy función coseno(x) -en verde-') >> xlabel('ángulo en radianes'), figure(gcf) >> ylabel('valor de la función trigonométrica'), figure(gcf) >> axis([-12,12,-1.5,1.5]), figure(gcf) >> axis('equal'), figure(gcf) >> axis('normal'), figure(gcf) >> axis('square'), figure(gcf) >> axis('off'), figure(gcf) >> axis('on'), figure(gcf) >> axis('on'), grid, figure(gcf) La función figure también admite que se fijen algunas de sus propiedades, como por
+
+  --- Top 3 (Chunk 772 | Score 0.3163) ---
+  al eje de abscisas. Con xlabel off desaparece ylabel('cual') añade una etiqueta al eje de ordenadas. Con ylabel off desaparece text(x,y,'texto') introduce 'texto' en el lugar especificado por las coordenadas x e y. Si x e y son vectores, el texto se repite por cada par de elementos. Si texto es también un vector de cadenas de texto de la misma dimensión, cada elemento se escribe en las coordenadas correspondientes gtext('texto') introduce texto con ayuda del ratón: el cursor cambia de forma y se espera
+
+  --- Top 4 (Chunk 909 | Score 0.2352) ---
+  definir la dirección del punto de vista mediante las tres coordenadas cartesianas de un vector (sólo se tiene en cuenta la dirección): view([xd,yd,zd]) En los gráficos tridimensionales existen funciones para controlar los ejes, por ejemplo: axis([xmin,xmax,ymin,ymax,zmin,zmax]) axis([xmin xmax ymin ymax zmin zmax cmin cmax]) Esta última función es una forma combinada de la función axis y de la función caxis, explicada en el apartado 9.2.2. También se pueden utilizar las funciones siguientes: xlabel, ylabel, zlabel, xlim, ylim, zlim, axis('auto'), axis(axis), etc. Las funciones mesh y
+
+  --- Top 5 (Chunk 42 | Score 0.2208) ---
+  instantes definidos por dos llamadas a la función clock3: >> n=1000; A=rand(n); B=rand(n); C=zeros(n); >> tini=clock; C=B*A; tend=clock; mflops=(2*n^3)/1000000; >> mflops/etime(tend,tini) Otro de los puntos fuertes de MATLAB son los gráficos, que se verán con más detalle en una sección posterior. A título de ejemplo, se puede teclear la siguiente línea y pulsar intro: >> x=-4:.01:4; y=sin(x); plot(x,y), grid, title('Función seno(x)') En la Figura 4 se puede observar que se abre una nueva ventana en la que aparece representada la función sin(x). Esta figura tiene
+
+======================================================
+PREGUNTA 15: ¿Para qué sirven los comandos hold on y hold off al superponer gráficas?
+RESPUESTA (Chunk #799 | Puntuacion BERT: 0.6233):
+en la figura (es posible que haya que modificar la escala de los ejes); el comando hold off deshace el efecto de hold on. El siguiente ejemplo muestra cómo se añaden las gráficas de x2 y x3 a la gráfica de x previamente creada (cada una con un tipo de línea diferente): >> plot(x) >> hold on >> plot(x2,'--') >> plot(x3,'-.') >> hold off 8.1.4. COMANDO SUBPLOT Una ventana gráfica se puede dividir en m particiones horizontales y n verticales, con objeto de representar múltiples
+
+  --- Top 1 (Chunk 799 | Score 0.6233) ---
+  en la figura (es posible que haya que modificar la escala de los ejes); el comando hold off deshace el efecto de hold on. El siguiente ejemplo muestra cómo se añaden las gráficas de x2 y x3 a la gráfica de x previamente creada (cada una con un tipo de línea diferente): >> plot(x) >> hold on >> plot(x2,'--') >> plot(x3,'-.') >> hold off 8.1.4. COMANDO SUBPLOT Una ventana gráfica se puede dividir en m particiones horizontales y n verticales, con objeto de representar múltiples
+
+  --- Top 2 (Chunk 798 | Score 0.6004) ---
+  plot(x,y,'-.rs', 'LineWidth',4, 'MarkerEdgeColor','k', 'MarkerFaceColor', 'g',... 'MarkerSize',10) 8.1.3. AÑADIR LÍNEAS A UN GRÁFICO YA EXISTENTE Existe la posibilidad de añadir líneas a un gráfico ya existente, sin destruirlo o sin abrir una nueva ventana. Se utilizan para ello los comandos hold on y hold off. El primero de ellos hace que los gráficos sucesivos respeten los que ya se han dibujado en la figura (es posible que haya que modificar la escala de los ejes); el comando hold off deshace el efecto de hold on. El
+
+  --- Top 3 (Chunk 805 | Score 0.4404) ---
+  origen en la esquina superior izda. y el eje j en dirección vertical descendente axis('xy') utiliza ejes cartesianos normales, con el origen en la esquina inferior izda. y el eje y vertical ascendente axis('auto x') utiliza el escalado automático sólo en dirección x axis('auto xz') utiliza el escalado automático sólo en direcciones x, z axis(axis) mantiene los ejes en sus actuales valores, de cara a posibles nuevas gráficas añadidas con hold on axis('tight') establece los mismos límites para los ejes que para los datos axis('equal')
+
+  --- Top 4 (Chunk 806 | Score 0.3977) ---
+  actuales valores, de cara a posibles nuevas gráficas añadidas con hold on axis('tight') establece los mismos límites para los ejes que para los datos axis('equal') el escalado es igual en ambos ejes axis('square') la ventana será cuadrada i j y x la ventana tendrá las proporciones de la imagen que se desea representar en ella (por ejemplo la de una imagen bitmap que se desee importar) y el escalado de los ejes será coherente con dicha imagen axis('normal') elimina las restricciones introducidas por 'equal' y
+
+  --- Top 5 (Chunk 820 | Score 0.3935) ---
+  uno está a la vista, se está dibujando en el otro, y cuando el dibujo está terminado este segundo panel se hace visible. El resultado del doble buffer es que las animaciones y el movimiento se ven de modo perfecto, sin el parpadeo (flicker) tan característico cuando no se utiliza esta técnica. Para dibujar con doble buffer en la ventana activa basta ejecutar los comandos siguientes (sin demasiadas explicaciones, que se pueden buscar en el Help de MATLAB): >> set(gcf,'DoubleBuffer','on', 'Renderer','painters') 8.3. Otras funciones gráficas
+
+======================================================
+PREGUNTA 16: ¿Cómo se divide una ventana gráfica en múltiples subventanas con el comando subplot?
+RESPUESTA (Chunk #800 | Puntuacion BERT: 0.6776):
+plot(x3,'-.') >> hold off 8.1.4. COMANDO SUBPLOT Una ventana gráfica se puede dividir en m particiones horizontales y n verticales, con objeto de representar múltiples gráficos en ella. Cada una de estas subventanas tiene sus propios ejes, aunque otras propiedades son comunes a toda la figura. La forma general de este comando es: >> subplot(m,n,i) donde m y n son el número de subdivisiones en filas y columnas, e i es la subdivisión que se convierte en activa. Las subdivisiones se numeran consecutivamente empezando por
+
+  --- Top 1 (Chunk 800 | Score 0.6776) ---
+  plot(x3,'-.') >> hold off 8.1.4. COMANDO SUBPLOT Una ventana gráfica se puede dividir en m particiones horizontales y n verticales, con objeto de representar múltiples gráficos en ella. Cada una de estas subventanas tiene sus propios ejes, aunque otras propiedades son comunes a toda la figura. La forma general de este comando es: >> subplot(m,n,i) donde m y n son el número de subdivisiones en filas y columnas, e i es la subdivisión que se convierte en activa. Las subdivisiones se numeran consecutivamente empezando por
+
+  --- Top 2 (Chunk 799 | Score 0.4309) ---
+  en la figura (es posible que haya que modificar la escala de los ejes); el comando hold off deshace el efecto de hold on. El siguiente ejemplo muestra cómo se añaden las gráficas de x2 y x3 a la gráfica de x previamente creada (cada una con un tipo de línea diferente): >> plot(x) >> hold on >> plot(x2,'--') >> plot(x3,'-.') >> hold off 8.1.4. COMANDO SUBPLOT Una ventana gráfica se puede dividir en m particiones horizontales y n verticales, con objeto de representar múltiples
+
+  --- Top 3 (Chunk 111 | Score 0.2680) ---
+  programa que la había llamado, las variables definidas en la función dejan de existir (salvo que se hayan declarado como persistent) y también deja de existir su espacio de trabajo. Si se desean examinar otras matrices y/o vectores, al hacer doble clic sobre ellas el Array Editor las muestra en la misma ventana como subventanas con una pestaña diferente. Clicando con el botón derecho sobre alguna de las variables del Workspace Browser se abre un menú contextual que ofrece algunas posibilidades interesantes, como por ejemplo
+
+  --- Top 4 (Chunk 199 | Score 0.2216) ---
+  Es importante saber cómo trabaja MATLAB con estos números y los casos especiales que presentan. MATLAB mantiene una forma especial para los números muy grandes (más grandes que los que es capaz de representar), que son considerados como infinito. Por ejemplo, obsérvese cómo responde el programa al ejecutar el siguiente comando: >> 1.0/0.0 Warning: Divide by zero ans = Inf Así pues, para MATLAB el infinito se representa como inf ó Inf. MATLAB tiene también una representación especial para los resultados que no están definidos
+
+  --- Top 5 (Chunk 843 | Score 0.1990) ---
+  la película se puede representar el número de veces que se desee con el comando movie. Por ejemplo, para representar 10 veces la película anterior, a 15 imágenes por segundo, habría que ejecutar el comando siguiente (los dos últimos parámetros son opcionales): movie(M,10,15) Los comandos moviein, getframe y movie tienen posibilidades adicionales para las que puede consultarse el Help correspondiente. Hay que señalar que en MATLAB no es lo mismo un movie que una animación. Una animación es simplemente una ventana gráfica que va cambiando
+
+======================================================
+PREGUNTA 17: ¿Cómo se dibujan líneas y superficies en tres dimensiones con plot3, mesh y surf?
+RESPUESTA (Chunk #907 | Puntuacion BERT: 0.4606):
+los datos de que se dispone. Utilícese el help para ello. meshz surfl light colorbar sphere cylinder 9.2.7. ELEMENTOS GENERALES: EJES, PUNTOS DE VISTA, LÍNEAS OCULTAS, ... Las funciones surf y mesh dibujan funciones tridimensionales en perspectiva. La localización del punto de vista o dirección de observación se puede hacer mediante la función view, que tiene la siguiente forma: view(azimut, elev) donde azimut es el ángulo de rotación de un plano horizontal, medido sobre el eje z a partir del eje x en sentido antihorario,
+
+  --- Top 1 (Chunk 907 | Score 0.4606) ---
+  los datos de que se dispone. Utilícese el help para ello. meshz surfl light colorbar sphere cylinder 9.2.7. ELEMENTOS GENERALES: EJES, PUNTOS DE VISTA, LÍNEAS OCULTAS, ... Las funciones surf y mesh dibujan funciones tridimensionales en perspectiva. La localización del punto de vista o dirección de observación se puede hacer mediante la función view, que tiene la siguiente forma: view(azimut, elev) donde azimut es el ángulo de rotación de un plano horizontal, medido sobre el eje z a partir del eje x en sentido antihorario,
+
+  --- Top 2 (Chunk 859 | Score 0.3921) ---
+  fichero test3d.m debe contener las líneas siguientes: function z=test3d(x,y) z = 3*(1-x).^2.*exp(-(x.^2) - (y+1).^2) ... - 10*(x/5 - x.^3 - y.^5).*exp(-x.^2-y.^2) ... - 1/3*exp(-(x+1).^2 - y.^2); Ahora, ejecútese la siguiente lista de comandos (directamente, o mejor creando un fichero llamado test3dMain.m que los contenga): >> x=[-3:0.4:3]; y=x; >> close >> subplot(2,2,1) >> figure(gcf),fi=[0:pi/20:6*pi]; >> plot3(cos(fi),sin(fi),fi,'r') >> grid >> [X,Y]=meshgrid(x,y); >> Z=test3d(X,Y); >> subplot(2,2,2) >> figure(gcf), mesh(Z) >> subplot(2,2,3) >> figure(gcf), surf(Z) >> subplot(2,2,4) >> figure(gcf), contour3(Z,16) En la figura resultante (Figura 46) aparece una buena
+
+  --- Top 3 (Chunk 867 | Score 0.3897) ---
+  para poderla representar en la pantalla. Al igual que en el caso plano, se puede incluir una cadena de 1, 2 ó 3 caracteres para determinar el color, los markers, y el tipo de línea: >> plot3(x,y,z,s) También se pueden utilizar tres matrices X, Y y Z del mismo tamaño: >> plot3(X,Y,Z) en cuyo caso se dibujan tantas líneas como columnas tienen estas 3 matrices, cada una de las cuales está definida por las 3 columnas homólogas de dichas matrices. A continuación se va a
+
+  --- Top 4 (Chunk 870 | Score 0.3531) ---
+  1 1 1 1 0 0 0 0 1 1 0 0 0 0 0 1 1 0 0 0 1 1 1 1 0 0 0 0 0 1 1 1 1 1 1 1 1 0 0 1 1 0]; plot3(A(1,:)',A(2,:)',A(3,:)') 9.1.3. DIBUJO DE MALLADOS: FUNCIONES MESHGRID, MESH Y SURF Ahora se verá con detalle cómo se puede dibujar una función de dos variables (z=f(x,y)) sobre un dominio rectangular. Se verá que también se pueden dibujar los elementos de una matriz como función
+
+  --- Top 5 (Chunk 897 | Score 0.3407) ---
+  siguientes funciones, las dos matrices argumento Z y C tienen el mismo tamaño: mesh(Z,C) surf(Z,C) En las figuras resultantes, mientras se dibujan los valores de Z, los colores se obtienen de C. Un caso típico es aquél en el que se quiere que los colores dependan de la curvatura de la superficie (y no de su valor). MATLAB dispone de la función del2, que aproxima la curvatura por diferencias finitas con el promedio de los 4 elementos contiguos, resultando así una matriz proporcional a la
+
+======================================================
+PREGUNTA 18: ¿Cómo se guardan y recuperan variables en disco con los comandos save y load?
+RESPUESTA (Chunk #153 | Puntuacion BERT: 0.6455):
+ASCII sólo se guardan los valores y no otra información tal como los nombres de las matrices y/o vectores. Cuando se recuperan estos ficheros con load -ascii toda la información se guarda en una única matriz con el nombre del fichero. Esto produce un error cuando no todas las filas tienen el mismo número de elementos. Con la opción -append en el comando save la información se guarda a continuación de lo que hubiera en el fichero. El comando load admite las opciones -ascii y
+
+  --- Top 1 (Chunk 153 | Score 0.6455) ---
+  ASCII sólo se guardan los valores y no otra información tal como los nombres de las matrices y/o vectores. Cuando se recuperan estos ficheros con load -ascii toda la información se guarda en una única matriz con el nombre del fichero. Esto produce un error cuando no todas las filas tienen el mismo número de elementos. Con la opción -append en el comando save la información se guarda a continuación de lo que hubiera en el fichero. El comando load admite las opciones -ascii y
+
+  --- Top 2 (Chunk 152 | Score 0.4440) ---
+  el estado de la sesión en formato ASCII utilizándolo de la siguiente forma (lo que va detrás del carácter (%) es un comentario que es ignorado por MATLAB): >> save -ascii % almacena 8 cifras decimales >> save -ascii -double % almacena 16 cifras decimales >> save -ascii -double -tab % almacena 16 cifras separadas por tabs aunque en formato ASCII sólo se guardan los valores y no otra información tal como los nombres de las matrices y/o vectores. Cuando se recuperan estos ficheros con
+
+  --- Top 3 (Chunk 151 | Score 0.4419) ---
+  el comando (sin comas entre los nombres de variables): >> save filename A x y guarda las variables A, x e y en un fichero binario llamado filename.mat (o filename). Para recuperarlas en otra sesión basta teclear: >> load filename Si no se indica ninguna variable, se guardan todas las variables creadas en esa sesión. El comando save permite guardar el estado de la sesión en formato ASCII utilizándolo de la siguiente forma (lo que va detrás del carácter (%) es un comentario que es
+
+  --- Top 4 (Chunk 150 | Score 0.3495) ---
+  gráficos, que por ocupar mucha memoria hay que guardar aparte). Dicho estado puede recuperarse la siguiente vez que se arranque el programa con el comando: >> load Esta es la forma más básica de los comandos save y load. Se pueden guardar también matrices y vectores de forma selectiva y en ficheros con nombre especificado por el usuario. Por ejemplo, el comando (sin comas entre los nombres de variables): >> save filename A x y guarda las variables A, x e y en un fichero
+
+  --- Top 5 (Chunk 147 | Score 0.3165) ---
+  al abandonar la ejecución de MATLAB con el comando quit se ejecuta automáticamente el fichero finish.m, siempre que se encuentre en alguno de los directorios del search path. Este fichero se puede utilizar por ejemplo para guardar el espacio de trabajo de MATLAB (ver apartado 2.8) y poder continuar en otro momento a partir del punto en el que se abandonó el trabajo, por ejemplo al cerrar el programa. 2.8. Guardar variables y estados de una sesión: Comandos save y load En muchas ocasiones puede
+
+======================================================
+PREGUNTA 19: ¿Qué es un fichero de comandos o script .m y para qué sirve el comando echo?
+RESPUESTA (Chunk #468 | Puntuacion BERT: 0.6801):
+Este comando tiene varias formas: echo on activa el echo en todos los ficheros script echo off desactiva el echo echo file on donde 'file' es el nombre de un fichero de función, activa el echo en esa función echo file off desactiva el echo en la función echo file pasa de on a off y viceversa echo on all activa el echo en todas las funciones echo off all desactiva el echo de todas las funciones Mención especial merece el fichero de comandos startup.m
+
+  --- Top 1 (Chunk 468 | Score 0.6801) ---
+  Este comando tiene varias formas: echo on activa el echo en todos los ficheros script echo off desactiva el echo echo file on donde 'file' es el nombre de un fichero de función, activa el echo en esa función echo file off desactiva el echo en la función echo file pasa de on a off y viceversa echo on all activa el echo en todas las funciones echo off all desactiva el echo de todas las funciones Mención especial merece el fichero de comandos startup.m
+
+  --- Top 2 (Chunk 467 | Score 0.6305) ---
+  ejecuta el fichero, esto es variables con el mismo carácter que las que se crean interactivamente en MATLAB si el fichero se ha ejecutado desde la línea de comandos. Al terminar la ejecución del script, dichas variables permanecen en memoria. El comando echo hace que se impriman los comandos que están en un script a medida que van siendo ejecutados. Este comando tiene varias formas: echo on activa el echo en todos los ficheros script echo off desactiva el echo echo file on donde 'file'
+
+  --- Top 3 (Chunk 469 | Score 0.6130) ---
+  activa el echo en todas las funciones echo off all desactiva el echo de todas las funciones Mención especial merece el fichero de comandos startup.m (ver apartado 2.7). Este fichero se ejecuta cada vez que se entra en MATLAB. En él puede introducir todos aquellos comandos que le interesa se ejecuten siempre al iniciar la sesión, por ejemplo format compact y los comandos necesarios para modificar el path. 6.3.2. DEFINICIÓN DE FUNCIONES La primera línea de un fichero llamado name.m que define una función tiene
+
+  --- Top 4 (Chunk 587 | Score 0.1780) ---
+  !notepad & Existe también la posibilidad de arrancar una aplicación y dejarla iconizada. Esto se hace postponiendo el carácter barra vertical (|), como por ejemplo en el comando: >> !notepad | Algunos comandos de MATLAB realizan la misma función que los comandos análogos del sistema operativo MS-DOS, con lo que se puede evitar utilizar el operador (!). Algunos de estos comandos son los siguientes: dir contenido del directorio actual what ficheros *.m en el directorio actual delete filename borra el fichero llamado filename mkdir(nd) crea
+
+  --- Top 5 (Chunk 268 | Score 0.1696) ---
+  fichero de comandos se llama desde una función, las variables que se crean pertenecen al espacio de trabajo de dicha función. Como ejemplo se puede crear un fichero llamado unidad.m que construya una matriz unidad de tamaño 3×3 llamada U33 en un directorio llamado c:\matlab. Este fichero deberá contener la línea siguiente: U33=eye(3) Desde MATLAB llámese al comando unidad y obsérvese el resultado. Entre otras razones, es muy importante utilizar ficheros de comandos para poder utilizar el Debugger y para evitar teclear muchas veces los
+
+======================================================
+PREGUNTA 20: ¿Cómo se crean matrices de ceros con zeros, de unos con ones y la matriz unidad con eye?
+RESPUESTA (Chunk #233 | Puntuacion BERT: 0.6540):
+orientadas a definir con gran facilidad matrices de tipos particulares. Algunas de estas funciones son las siguientes: eye(4) forma la matriz unidad de tamaño (4×4) zeros(3,5) forma una matriz de ceros de tamaño (3×5) zeros(4) ídem de tamaño (4×4) ones(3) forma una matriz de unos de tamaño (3×3) ones(2,4) idem de tamaño (2×4) linspace(x1,x2,n) genera un vector con n valores igualmente espaciados entre x1 y x2 logspace(d1,d2,n) genera un vector con n valores espaciados logarítmicamente entre 10^d1 y 10^d2. Si d2 es pi9, los puntos
+
+  --- Top 1 (Chunk 233 | Score 0.6540) ---
+  orientadas a definir con gran facilidad matrices de tipos particulares. Algunas de estas funciones son las siguientes: eye(4) forma la matriz unidad de tamaño (4×4) zeros(3,5) forma una matriz de ceros de tamaño (3×5) zeros(4) ídem de tamaño (4×4) ones(3) forma una matriz de unos de tamaño (3×3) ones(2,4) idem de tamaño (2×4) linspace(x1,x2,n) genera un vector con n valores igualmente espaciados entre x1 y x2 logspace(d1,d2,n) genera un vector con n valores espaciados logarítmicamente entre 10^d1 y 10^d2. Si d2 es pi9, los puntos
+
+  --- Top 2 (Chunk 232 | Score 0.4534) ---
+  no hace falta definir el tamaño de una matriz. Las matrices toman tamaño al ser definidas y este tamaño puede ser modificado por el usuario mediante adición y/o borrado de filas y columnas. A continuación se van a ver otras formas más potentes y generales de definir y/o modificar matrices. 3.5.1. TIPOS DE MATRICES PREDEFINIDOS Existen en MATLAB varias funciones orientadas a definir con gran facilidad matrices de tipos particulares. Algunas de estas funciones son las siguientes: eye(4) forma la matriz unidad de tamaño (4×4)
+
+  --- Top 3 (Chunk 240 | Score 0.4205) ---
+  representa el número π. [m,n]=size(A) devuelve el número de filas y de columnas de la matriz A. Si la matriz es cuadrada basta recoger el primer valor de retorno n=length(x) calcula el número de elementos de un vector x zeros(size(A)) forma una matriz de ceros del mismo tamaño que una matriz A previamente creada ones(size(A)) ídem con unos A=diag(x) forma una matriz diagonal A cuyos elementos diagonales son los elementos de un vector ya existente x forma un vector x a partir de los elementos
+
+  --- Top 4 (Chunk 369 | Score 0.4156) ---
+  = 1 2 3 4 5 6 >> AA(:,:,2)=[2 3 4; 5 6 7] % se añade una segunda matriz AA(:,:,1) = 1 2 3 4 5 6 AA(:,:,2) = 2 3 4 5 6 7 k 5.2.2. FUNCIONES QUE TRABAJAN CON HIPERMATRICES Algunas funciones de MATLAB para generar matrices admiten más de dos subíndices y pueden ser utilizadas para generar hipermatrices. Entre ellas están rand(), randn(), zeros() y ones(). Por ejemplo, véase la siguiente sentencia y su resultado: >> BB=randn(2,3,2) BB(:,:,1) = -0.4326 0.1253
+
+  --- Top 5 (Chunk 268 | Score 0.4120) ---
+  fichero de comandos se llama desde una función, las variables que se crean pertenecen al espacio de trabajo de dicha función. Como ejemplo se puede crear un fichero llamado unidad.m que construya una matriz unidad de tamaño 3×3 llamada U33 en un directorio llamado c:\matlab. Este fichero deberá contener la línea siguiente: U33=eye(3) Desde MATLAB llámese al comando unidad y obsérvese el resultado. Entre otras razones, es muy importante utilizar ficheros de comandos para poder utilizar el Debugger y para evitar teclear muchas veces los
+
+======================================================
+PREGUNTA 21: ¿Cómo se resuelven sistemas de ecuaciones lineales Ax = b con el operador barra invertida \?
+RESPUESTA (Chunk #185 | Puntuacion BERT: 0.6825):
+su gran importancia, estos operadores requieren una explicación detenida. Considérese el siguiente sistema de ecuaciones lineales, Ax = b (1) donde x y b son vectores columna, y A una matriz cuadrada invertible. La resolución de este sistema de ecuaciones se puede escribir en las 2 formas siguientes (¡Atención a la 2a forma, basada en la barra invertida (\)8, que puede resultar un poco extraña!): x = inv(A)*b (2a) x = A\b (2b) Así pues, el operador división-izquierda por una matriz (barra invertida \) equivale
+
+  --- Top 1 (Chunk 185 | Score 0.6825) ---
+  su gran importancia, estos operadores requieren una explicación detenida. Considérese el siguiente sistema de ecuaciones lineales, Ax = b (1) donde x y b son vectores columna, y A una matriz cuadrada invertible. La resolución de este sistema de ecuaciones se puede escribir en las 2 formas siguientes (¡Atención a la 2a forma, basada en la barra invertida (\)8, que puede resultar un poco extraña!): x = inv(A)*b (2a) x = A\b (2b) Así pues, el operador división-izquierda por una matriz (barra invertida \) equivale
+
+  --- Top 2 (Chunk 323 | Score 0.6405) ---
+  = null(A,'r') Q = orth(A) – c = cond(A) c = condest(A) – 4.5.4. FUNCIÓN LINSOLVE() La función linsolve es la forma más eficiente de que dispone MATLAB para resolver sistemas de ecuaciones lineales. A diferencia del operador barra invertida \, esta función no trata de averiguar las características de la matriz que permitan hacer una resolución más eficiente: se fía de lo que le dice el usuario. Si éste se equivoca, se obtendrá un resultado incorrecto sin ningún mensaje de error. Las formas generales
+
+  --- Top 3 (Chunk 621 | Score 0.5504) ---
+  con la expresión (12) es que para calcular la función en t+Δt hace uso de la derivada en ese mismo instante, que no puede ser conocida si no se conoce la función. Eso quiere decir que el sistema (12) es un sistema de ecuaciones no lineales que hay que resolver iterativamente. Los sistemas de ecuaciones no lineales se resuelven mucho más rápidamente si se conoce la derivada de la función (un ejemplo es el método de Newton-Raphson). Los integradores stiff de MATLAB son capaces de
+
+  --- Top 4 (Chunk 184 | Score 0.4491) ---
+  de división / para dividir por un escalar todos los elementos de una matriz o un vector. Esto no constituye ninguna sorpresa. Sin embargo, el uso que se describe a continuación sí requiere más atención. 3.2.2. OPERADORES PARA LA RESOLUCIÓN DE SISTEMAS DE ECUACIONES LINEALES MATLAB utiliza los operadores de división para la resolución de sistemas de ecuaciones lineales. Por su gran importancia, estos operadores requieren una explicación detenida. Considérese el siguiente sistema de ecuaciones lineales, Ax = b (1) donde x y b son
+
+  --- Top 5 (Chunk 186 | Score 0.4422) ---
+  puede resultar un poco extraña!): x = inv(A)*b (2a) x = A\b (2b) Así pues, el operador división-izquierda por una matriz (barra invertida \) equivale a pre-multiplicar por la inversa de esa matriz. En realidad este operador es más general y más inteligente de lo que aparece en el ejemplo anterior: el operador división-izquierda es aplicable aunque la matriz no tenga inversa e incluso no sea cuadrada, en cuyo caso la solución que se obtiene (por lo general) es la que proporciona el método de
+
+======================================================
+PREGUNTA 22: ¿Cómo se calculan los valores propios y vectores propios de una matriz cuadrada con eig?
+RESPUESTA (Chunk #290 | Puntuacion BERT: 0.7037):
+modifican las copias, no las variables originales). Se podría decir que los argumentos de las funciones de MA- TLAB siempre se pasan por valor, nunca por referencia. MATLAB admite valores de retorno matriciales múltiples. Por ejemplo, en el comando: >> [V, D] = eig(A) la función eig() calcula los valores y vectores propios de la matriz cuadrada A. Los vectores propios se devuelven como columnas de la matriz V, mientras que los valores propios son los elementos de la matriz diagonal D. En los ejemplos
+
+  --- Top 1 (Chunk 290 | Score 0.7037) ---
+  modifican las copias, no las variables originales). Se podría decir que los argumentos de las funciones de MA- TLAB siempre se pasan por valor, nunca por referencia. MATLAB admite valores de retorno matriciales múltiples. Por ejemplo, en el comando: >> [V, D] = eig(A) la función eig() calcula los valores y vectores propios de la matriz cuadrada A. Los vectores propios se devuelven como columnas de la matriz V, mientras que los valores propios son los elementos de la matriz diagonal D. En los ejemplos
+
+  --- Top 2 (Chunk 311 | Score 0.6898) ---
+  valores propios (diagonal de D) y vectores propios (columnas de X) de una matriz cuadrada A. Con frecuencia el resultado es complejo (si A no es simétrica) [X,D] = eig(A,B) valores propios (diagonal de D) y vectores propios (columnas de X) de dos matrices cuadradas A y B (Ax = λBx). Los vectores propios están normalizados de modo que X'*B*X=I. Cuando A es simétrica y B es simétrica y definida-positiva se puede utilizar [X,D] = eig(A,B,'chol'). Funciones basadas en la descomposición QR: [Q,R] = qr(A)
+
+  --- Top 3 (Chunk 310 | Score 0.6062) ---
+  una matriz triangular superior tal que A = U'*U devuelve una estimación del recíproco de la condición numérica de la matriz A basada en la norma-1. Si el resultado es próximo a 1 la matriz A está bien condicionada; si es próximo a 0 no lo está. Funciones basadas en el cálculo de valores y vectores propios: [X,D] = eig(A) valores propios (diagonal de D) y vectores propios (columnas de X) de una matriz cuadrada A. Con frecuencia el resultado es complejo (si A no
+
+  --- Top 4 (Chunk 787 | Score 0.5993) ---
+  reales y desprecia las partes imaginarias. Sin embargo, un único argumento complejo hace que se represente la parte real en abscisas, frente a la parte imaginaria en ordenadas. Véase el siguiente ejemplo. Para generar un vector complejo se utilizará el resultado del cálculo de valores propios de una matriz formada aleatoriamente: >> plot(eig(rand(20,20)),'+') donde se ha hecho uso de elementos que se verán en la siguiente sección, respecto a dibujar con distintos tipos de “markers” (en este caso con signos +), en vez de con
+
+  --- Top 5 (Chunk 306 | Score 0.4865) ---
+  A=XDX', expm(A) = X*diag(exp(diag(D)))*X' sqrtm(A) devuelve una matriz que multiplicada por sí misma da la matriz A logm() es la función recíproca de expm(A) Aunque no pertenece a esta familia de funciones, se puede considerar que el operador potencia (^) está emparentado con ellas. Así, es posible decir que: A^n está definida si A es cuadrada y n un número real. Si n es entero, el resultado se calcula por multiplicaciones sucesivas. Si n es real, el resultado se calcula como: A^n=X*D.^n*X' siendo [X,D]=eig(A) 4.5.3.
+
+======================================================
+PREGUNTA 23: ¿Cómo se convierten y manejan cadenas de caracteres con char y double?
+RESPUESTA (Chunk #358 | Puntuacion BERT: 0.4597):
+>> size(cc) % se han añadido tres espacios a 'más' ans = 2 6 Las funciones más importantes para manejo de cadenas de caracteres son las siguientes: double(c) convierte en números ASCII cada carácter char(v) convierte un vector de números v en una cadena de caracteres crea una matriz de caracteres, completando con blancos las cadenas más cortas elimina los blancos al final de una cadena de caracteres imprime el texto contenido en la variable c detecta si una variable es una cadena de caracteres
+
+  --- Top 1 (Chunk 358 | Score 0.4597) ---
+  >> size(cc) % se han añadido tres espacios a 'más' ans = 2 6 Las funciones más importantes para manejo de cadenas de caracteres son las siguientes: double(c) convierte en números ASCII cada carácter char(v) convierte un vector de números v en una cadena de caracteres crea una matriz de caracteres, completando con blancos las cadenas más cortas elimina los blancos al final de una cadena de caracteres imprime el texto contenido en la variable c detecta si una variable es una cadena de caracteres
+
+  --- Top 2 (Chunk 357 | Score 0.4535) ---
+  y practicar con ellos: >> c='cadena' c = cadena >> size(c) % dimensiones del array ans = 1 6 >> double(c) % convierte en números ASCII cada carácter ans = 99 97 100 101 110 97 >> char(abs(c)) % convierte números ASCII en caracteres ans = cadena >> cc=char('más','madera') % convierte dos cadenas en una matriz cc = más madera >> size(cc) % se han añadido tres espacios a 'más' ans = 2 6 Las funciones más importantes para manejo de cadenas de caracteres son
+
+  --- Top 3 (Chunk 718 | Score 0.3391) ---
+  de argumentos pasados por referencia. En este caso, MATLAB crea valores de retorno adicionales para devolver estos valores. 7.1.5. CONVERSIÓN DE DATOS La Tabla 2 y la Tabla 3 muestran la equivalencia de tipos de datos entre C y MATLAB. Tipo de C (en un ordenador de 32 bit) Tipo equivalente de MATLAB char, byte int8 unsigned char, byte uint8 short int16 unsigned short uint16 int, long int32 unsigned int, unsigned long uint32 float single double double char * cstring (1xn char array) *char[] cell
+
+  --- Top 4 (Chunk 364 | Score 0.3165) ---
+  una matriz de caracteres cc en un vector de celdas vc, eliminando los blancos adicionales al final de cada cadena. La función char() realiza las conversiones opuestas convierte valores numéricos en cadenas de caracteres, de acuerdo con las reglas y formatos de conversión del lenguaje C. Esta es la función más general para este tipo de conversión y se verá con mas detalle en la Sección 6.6.2. Con las funciones anteriores se dispone en MATLAB de una amplia gama de posibilidades para trabajar con cadenas
+
+  --- Top 5 (Chunk 366 | Score 0.3135) ---
+  numéricos en cadenas de caracteres para poder imprimirlos como títulos en los dibujos o gráficos. Véase el siguiente ejemplo: char(c1,c2) deblank(c) disp(c) ischar(c) isletter() isspace() int2str(v) num2str(x,n) sprintf >> fahr=70; grd=(fahr-32)/1.8; >> title(['Temperatura ambiente: ',num2str(grd),' grados centígrados']) 5.2. Hipermatrices (arrays de más de dos dimensiones) MATLAB permite trabajar con hipermatrices, es decir con matrices de más de dos dimensiones (Figura 27). Una posible aplicación es almacenar con un único nombre distintas matrices del mismo tamaño (resulta una hipermatriz de 3 dimensiones). Los elementos de una
+
+======================================================
+PREGUNTA 24: ¿Qué es un vector de celdas o cell array y cómo se crean sus elementos con llaves?
+RESPUESTA (Chunk #441 | Puntuacion BERT: 0.6777):
+la switch_expresion, cuyo resultado debe ser un número escalar o una cadena de caracteres. Este resultado se compara con las case_expr, y se ejecuta el bloque de sentencias que corresponda con ese resultado. Si ninguno es igual a switch_expresion se ejecutan las sentencias correspondientes a otherwise. Según puede verse en el ejemplo anterior, es posible agrupar varias condiciones dentro de unas llaves (constituyendo lo que se llama un cell array o vector de celdas, explicado en el apartado 5.4); basta la igualdad con cualquier elemento
+
+  --- Top 1 (Chunk 441 | Score 0.6777) ---
+  la switch_expresion, cuyo resultado debe ser un número escalar o una cadena de caracteres. Este resultado se compara con las case_expr, y se ejecuta el bloque de sentencias que corresponda con ese resultado. Si ninguno es igual a switch_expresion se ejecutan las sentencias correspondientes a otherwise. Según puede verse en el ejemplo anterior, es posible agrupar varias condiciones dentro de unas llaves (constituyendo lo que se llama un cell array o vector de celdas, explicado en el apartado 5.4); basta la igualdad con cualquier elemento
+
+  --- Top 2 (Chunk 442 | Score 0.6548) ---
+  unas llaves (constituyendo lo que se llama un cell array o vector de celdas, explicado en el apartado 5.4); basta la igualdad con cualquier elemento del cell array para que se ejecute ese bloque de sentencias. La “igualdad” debe entenderse en el sentido del operador de igualdad (==) para escalares y la función strcmp() para cadenas de caracteres). A diferencia de C/C++/Java16, en MATLAB sólo se ejecuta uno de los bloques relacionado con un case. 6.1.3. SENTENCIA FOR La sentencia for repite un conjunto de
+
+  --- Top 3 (Chunk 385 | Score 0.6314) ---
+  >> clase.alum(2).nombre='María'; >> clase.alum(2).edad=17; >> clase.alum(2) ans = nombre: 'María' edad: 17 >> clase.alum(1) ans = nombre: 'Juan' edad: 19 Las estructuras se generalizan con las clases y los objetos, que no se verán en este manual. 5.4. Vectores o matrices de celdas (Cell Arrays) Un vector (matriz o hipermatriz) de celdas es un vector (matriz o hipermatriz) cuyos elementos son cada uno de ellos una variable de tipo cualquiera. En un array ordinario todos sus elementos son números o cadenas de caracteres. Sin embargo,
+
+  --- Top 4 (Chunk 481 | Score 0.6143) ---
+  elementos como sean necesarios para poder recoger en dichos elementos todos los argumentos que se hayan pasado en la llamada. No es necesario que varargin sea el único argumento, pero sí debe ser el último de los que haya, pues recoge todos los argumentos a partir de una determinada posición. Recuérdese que a los elementos de un cell array se accede utilizando llaves {}, en lugar de paréntesis (). 17 Es un concepto distinto del de funciones sobrecargadas (funciones distintas con el mismo nombre y
+
+  --- Top 5 (Chunk 386 | Score 0.6130) ---
+  son cada uno de ellos una variable de tipo cualquiera. En un array ordinario todos sus elementos son números o cadenas de caracteres. Sin embargo, en un array de celdas, el primer elemento puede ser un número; el segundo una matriz; el tercero una cadena de caracteres; el cuarto una estructura, etc. 5.4.1. CREACIÓN DE VECTORES Y MATRICES DE CELDAS Obsérvese por ejemplo cómo se crea, utilizando llaves {}, el siguiente vector de celdas, >> vc(1)={[1 2 3]} vc = [1x3 double] >> vc(2)={'mi nombre'}
+
+======================================================
+PREGUNTA 25: ¿Cómo se definen y utilizan las estructuras struct y sus campos fields?
+RESPUESTA (Chunk #374 | Puntuacion BERT: 0.7012):
+operan sobre vectores (sum(), max(), etc.) se aplican a matrices e hipermatrices según la primera dimensión, resultando un array de una dimensión inferior. 3. Las funciones matriciales propias del Álgebra Lineal (det(), inv(), etc.) no se pueden aplicar a hipermatrices. Para poderlas aplicar hay que extraer primero las matrices correspondientes (por ejemplo, con el operador dos puntos (:)). 5.3. Estructuras Una estructura (struct) es una agrupación de datos de tipo diferente bajo un mismo nombre. Estos datos se llaman miembros (members) o campos (fields). Una
+
+  --- Top 1 (Chunk 374 | Score 0.7012) ---
+  operan sobre vectores (sum(), max(), etc.) se aplican a matrices e hipermatrices según la primera dimensión, resultando un array de una dimensión inferior. 3. Las funciones matriciales propias del Álgebra Lineal (det(), inv(), etc.) no se pueden aplicar a hipermatrices. Para poderlas aplicar hay que extraer primero las matrices correspondientes (por ejemplo, con el operador dos puntos (:)). 5.3. Estructuras Una estructura (struct) es una agrupación de datos de tipo diferente bajo un mismo nombre. Estos datos se llaman miembros (members) o campos (fields). Una
+
+  --- Top 2 (Chunk 375 | Score 0.6624) ---
+  Una estructura (struct) es una agrupación de datos de tipo diferente bajo un mismo nombre. Estos datos se llaman miembros (members) o campos (fields). Una estructura es un nuevo tipo de dato, del que luego se pueden crear muchas variables (objetos o instances). Por ejemplo, la estructura alumno puede contener los campos nombre (una cadena de caracteres) y carnet (un número). 5.3.1. CREACIÓN DE ESTRUCTURAS En MATLAB la estructura alumno se crea creando un objeto de dicha estructura. A diferencia de otros lenguajes de programación,
+
+  --- Top 3 (Chunk 378 | Score 0.3389) ---
+  por ejemplo, >> al = struct('nombre', 'Ignacio', 'carnet', 76589) al = nombre: 'Ignacio' carnet: 76589 Los nombres de los campos se pasan a la función struct() entre apóstrofos ('), seguidos del valor que se les quiere dar. Este valor puede ser la cadena vacía ('') o la matriz vacía ([]). Pueden crearse vectores y matrices (e hipermatrices) de estructuras. Por ejemplo, la sentencia, >> alum(10) = struct('nombre', 'Ignacio', 'carnet', 76589) crea un vector de 10 elementos cada uno de los cuales es una estructura tipo
+
+  --- Top 4 (Chunk 384 | Score 0.3261) ---
+  sean otras estructuras. Para acceder a los campos de la estructura más interna se utiliza dos veces el operador punto (.), como puede verse en el siguiente ejemplo, en el que la estructura clase contiene un campo que es un vector alum de alumnos, >> clase=struct('curso','primero','grupo','A', ... 'alum', struct('nombre','Juan', 'edad', 19)) clase = curso: 'primero' grupo: 'A' alum: [1x1 struct] >> clase.alum(2).nombre='María'; >> clase.alum(2).edad=17; >> clase.alum(2) ans = nombre: 'María' edad: 17 >> clase.alum(1) ans = nombre: 'Juan' edad: 19 Las estructuras se generalizan con
+
+  --- Top 5 (Chunk 525 | Score 0.2619) ---
+  una estructura que puede mostrarse por separado): >> info=functions(@deblank) function: 'deblank' type: 'overloaded' file: 'c:\matlab6p5\toolbox\matlab\strfun\deblank' methods: [1x1 struct] >> info.methods ans = cell: 'c:\matlab6p5\toolbox\matlab\strfun\@cell\deblank' En este caso concreto se ha considerado la función deblank, que permite eliminar caracteres en blanco en cadenas de caracteres o en vectoras de celdas con cadenas de caracteres. El valor de retorno de la función functions es una estructura con los cuatro campos siguientes: function cadena de caracteres con el nombre de la función a la que corresponde la referencia
+
+======================================================
+PREGUNTA 26: ¿Cómo se abren y cierran ficheros con fopen y fclose para lectura y escritura?
+RESPUESTA (Chunk #563 | Puntuacion BERT: 0.6745):
+MATLAB dispone de funciones de lectura/escritura análogas a las del lenguaje C (en las que están inspiradas), aunque con algunas diferencias. En general son versiones simplificadas –con menos opciones y posibilidades– que las correspondientes funciones de C. 6.6.1. FUNCIONES FOPEN Y FCLOSE Estas funciones sirven para abrir y cerrar ficheros, respectivamente. La función fopen tiene la forma siguiente: [fi,texto] = fopen('filename','c') donde fi es un valor de retorno que sirve como identificador del fichero, texto es un mensaje para caso de que se produzca un
+
+  --- Top 1 (Chunk 563 | Score 0.6745) ---
+  MATLAB dispone de funciones de lectura/escritura análogas a las del lenguaje C (en las que están inspiradas), aunque con algunas diferencias. En general son versiones simplificadas –con menos opciones y posibilidades– que las correspondientes funciones de C. 6.6.1. FUNCIONES FOPEN Y FCLOSE Estas funciones sirven para abrir y cerrar ficheros, respectivamente. La función fopen tiene la forma siguiente: [fi,texto] = fopen('filename','c') donde fi es un valor de retorno que sirve como identificador del fichero, texto es un mensaje para caso de que se produzca un
+
+  --- Top 2 (Chunk 566 | Score 0.4740) ---
+  programa se puede ver cómo utilizar esta función). Después de realizar las operaciones de lectura y escritura deseadas, el fichero se puede cerrar con la función close en la forma siguiente: st = fclose(fi) donde st es un valor de retorno para posibles condiciones de error. Si se quieren cerrar a la vez todos los ficheros abiertos puede utilizarse el comando: st = close('all') 6.6.2. FUNCIONES FSCANF, SSCANF, FPRINTF Y SPRINTF Estas funciones permiten leer y escribir en ficheros ASCII, es decir, en ficheros formateados.
+
+  --- Top 3 (Chunk 564 | Score 0.2935) ---
+  fopen('filename','c') donde fi es un valor de retorno que sirve como identificador del fichero, texto es un mensaje para caso de que se produzca un error, y c es un carácter (o dos) que indica el tipo de operación que se desea realizar. Las opciones más importantes son las siguientes: 'r' lectura (de read) 'w' escritura reemplazando (de write) 'a' escritura a continuación (de append) 'r+' lectura y escritura Cuando por alguna razón el fichero no puede ser abierto, se devuelve un (-1). En este
+
+  --- Top 4 (Chunk 572 | Score 0.2714) ---
+  fprintf, pero en vez de leer o escribir en un fichero de texto (ASCII), lo hacen en un fichero binario, no legible directamente por el usuario. Aunque dichos ficheros no se pueden leer y/o modificar con un editor de textos, tienen la ventaja de que las operaciones de lectura y escritura son mucho más rápidas, eficientes y precisas (no se pierden decimales al escribir). Esto es particularmente significativo para grandes ficheros de datos. Para más información sobre estas funciones se puede utilizar el help. 6.6.4.
+
+  --- Top 5 (Chunk 562 | Score 0.2698) ---
+  son trasportables entre versiones de MATLAB en distintos tipos de computadores, porque contienen información sobre el tipo de máquina en el header del fichero, y el programa realiza la transformación de modo automático. Los ficheros *.m son de tipo ASCII, y por tanto pueden ser leídos por distintos computadores sin problemas de ningún tipo. 6.6. Lectura y escritura de ficheros MATLAB dispone de funciones de lectura/escritura análogas a las del lenguaje C (en las que están inspiradas), aunque con algunas diferencias. En general son versiones
+
+======================================================
+PREGUNTA 27: ¿Cómo se leen y escriben datos con formato mediante fscanf, sscanf, fprintf y sprintf?
+RESPUESTA (Chunk #566 | Puntuacion BERT: 0.5395):
+programa se puede ver cómo utilizar esta función). Después de realizar las operaciones de lectura y escritura deseadas, el fichero se puede cerrar con la función close en la forma siguiente: st = fclose(fi) donde st es un valor de retorno para posibles condiciones de error. Si se quieren cerrar a la vez todos los ficheros abiertos puede utilizarse el comando: st = close('all') 6.6.2. FUNCIONES FSCANF, SSCANF, FPRINTF Y SPRINTF Estas funciones permiten leer y escribir en ficheros ASCII, es decir, en ficheros formateados.
+
+  --- Top 1 (Chunk 566 | Score 0.5395) ---
+  programa se puede ver cómo utilizar esta función). Después de realizar las operaciones de lectura y escritura deseadas, el fichero se puede cerrar con la función close en la forma siguiente: st = fclose(fi) donde st es un valor de retorno para posibles condiciones de error. Si se quieren cerrar a la vez todos los ficheros abiertos puede utilizarse el comando: st = close('all') 6.6.2. FUNCIONES FSCANF, SSCANF, FPRINTF Y SPRINTF Estas funciones permiten leer y escribir en ficheros ASCII, es decir, en ficheros formateados.
+
+  --- Top 2 (Chunk 567 | Score 0.5238) ---
+  comando: st = close('all') 6.6.2. FUNCIONES FSCANF, SSCANF, FPRINTF Y SPRINTF Estas funciones permiten leer y escribir en ficheros ASCII, es decir, en ficheros formateados. La forma general de la función fscanf es la siguiente: [var1,var2,...] = fscanf(fi,'cadena de control',size) donde fi es el identificador del fichero (devuelto por la función fopen), y size es un argumento opcional que puede indicar el tamaño del vector o matriz a leer. Obsérvese otra diferencia con C: las variables leídas se devuelven como valor de retorno y no
+
+  --- Top 3 (Chunk 571 | Score 0.4200) ---
+  retorno, en vez de enviarlo a un fichero. Véase un ejemplo: resultado = sprintf('El cuadrado de %f es %12.4f\n',n,n*n) donde resultado es una cadena de caracteres. Esta función constituye el método más general de convertir números en cadenas de caracteres, por ejemplo para ponerlos como títulos de figuras. 6.6.3. FUNCIONES FREAD Y FWRITE Estas funciones son análogas a fscanf y fprintf, pero en vez de leer o escribir en un fichero de texto (ASCII), lo hacen en un fichero binario, no legible directamente por el
+
+  --- Top 4 (Chunk 569 | Score 0.3072) ---
+  variables enteras %f para variables de punto flotante %lf para variables de doble precisión La función sscanf es similar a fscanf pero la entrada de caracteres no proviene de un fichero sino de una cadena de caracteres. Finalmente, la función fprintf dirige su salida formateada hacia el fichero indicado por el identificador. Su forma general es: fprintf(fi,'cadena de control',var1,var2,...) Ésta es la función más parecida a su homóloga de C. La cadena de control contiene los formatos de escritura, que son similares a los de
+
+  --- Top 5 (Chunk 568 | Score 0.2847) ---
+  indicar el tamaño del vector o matriz a leer. Obsérvese otra diferencia con C: las variables leídas se devuelven como valor de retorno y no como argumentos pasados por referencia (precedidos por el carácter &). La cadena de control va encerrada entre apóstrofos simples, y contiene los especificadores de formato para las variables: %s para cadenas de caracteres %d para variables enteras %f para variables de punto flotante %lf para variables de doble precisión La función sscanf es similar a fscanf pero la entrada de
+
+======================================================
+PREGUNTA 28: ¿Cómo se leen variables desde teclado de forma interactiva con la función input?
+RESPUESTA (Chunk #452 | Puntuacion BERT: 0.6457):
+forma sencilla de leer variables desde teclado y escribir mensajes en la pantalla del PC. Más adelante se considerarán otros modos más generales –y complejos– de hacerlo. 6.2.1. FUNCIÓN INPUT La función input permite imprimir un mensaje en la línea de comandos de MATLAB y recuperar como valor de retorno un valor numérico o el resultado de una expresión tecleada por el usuario. Después de imprimir el mensaje, el programa espera que el usuario teclee el valor numérico o la expresión. Cualquier expresión válida de
+
+  --- Top 1 (Chunk 452 | Score 0.6457) ---
+  forma sencilla de leer variables desde teclado y escribir mensajes en la pantalla del PC. Más adelante se considerarán otros modos más generales –y complejos– de hacerlo. 6.2.1. FUNCIÓN INPUT La función input permite imprimir un mensaje en la línea de comandos de MATLAB y recuperar como valor de retorno un valor numérico o el resultado de una expresión tecleada por el usuario. Después de imprimir el mensaje, el programa espera que el usuario teclee el valor numérico o la expresión. Cualquier expresión válida de
+
+  --- Top 2 (Chunk 451 | Score 0.5653) ---
+  función lasterr que devuelve una cadena de caracteres con el mensaje correspondiente al último error que se ha producido. En la forma lasterr('') pone a cero este contador de errores, y hace que la función lasterr devuelva la matriz vacía [] hasta que se produzca un nuevo error. 6.2. Lectura y escritura interactiva de variables Se verá a continuación una forma sencilla de leer variables desde teclado y escribir mensajes en la pantalla del PC. Más adelante se considerarán otros modos más generales –y complejos–
+
+  --- Top 3 (Chunk 554 | Score 0.4635) ---
+  el momento de la creación del handle se crea una copia de las variables de su espacio de trabajo ampliado; estas copias son de tipo persistent y se conservan entre llamadas. Se recomienda ver los ejemplos en el Help de MATLAB. 6.5. Entrada y salida de datos Ya se ha visto una forma de realizar la entrada interactiva de datos por medio de la función input y de imprimir resultados por medio de la función disp. Ahora se van a ver otras formas de intercambiar
+
+  --- Top 4 (Chunk 165 | Score 0.3314) ---
+  como programa interactivo, en el que se irán definiendo las matrices, los vectores y las expresiones que los combinan y obteniendo los resultados sobre la marcha. Si estos resultados son asignados a otras variables podrán ser utilizados posteriormente en otras expresiones. En este sentido MATLAB sería como una potente calculadora matricial (en realidad es esto y mucho más...). Antes de tratar de hacer cálculos complicados, la primera tarea será aprender a introducir matrices y vectores desde el teclado. Más adelante se verán otras formas más
+
+  --- Top 5 (Chunk 453 | Score 0.3240) ---
+  por el usuario. Después de imprimir el mensaje, el programa espera que el usuario teclee el valor numérico o la expresión. Cualquier expresión válida de MATLAB es aceptada por este comando. El usuario puede teclear simplemente un vector o una matriz. En cualquier caso, la expresión introducida es evaluada con los valores actuales de las variables de MATLAB y el resultado se devuelve como valor de retorno. Véase un ejemplo de uso de esta función: >> n = input('Teclee el número de ecuaciones') Otra posible
+
+======================================================
+PREGUNTA 29: ¿Qué son las funciones anónimas definidas con el símbolo arroba @ y un fhandle?
+RESPUESTA (Chunk #540 | Puntuacion BERT: 0.6033):
+función como argumento, también por medio del fhandle. Por ejemplo, la siguiente función anónima calcula el valor del seno del ángulo doble: senoAngDoble = @(ang) 2*sin(and).*cos(ang); Las funciones anónimas acceden a las variables del espacio de trabajo en el que son definidas y crean en ese momento una copia de las variables que utilizan. El valor de dichas variables ya no se actualiza; sólo los argumentos pueden cambiar de valor. De esta forma, las funciones anónimas pueden ejecutarse a ravés del handle en otros espacios
+
+  --- Top 1 (Chunk 540 | Score 0.6033) ---
+  función como argumento, también por medio del fhandle. Por ejemplo, la siguiente función anónima calcula el valor del seno del ángulo doble: senoAngDoble = @(ang) 2*sin(and).*cos(ang); Las funciones anónimas acceden a las variables del espacio de trabajo en el que son definidas y crean en ese momento una copia de las variables que utilizan. El valor de dichas variables ya no se actualiza; sólo los argumentos pueden cambiar de valor. De esta forma, las funciones anónimas pueden ejecutarse a ravés del handle en otros espacios
+
+  --- Top 2 (Chunk 539 | Score 0.5412) ---
+  línea de comandos, bien en una línea cualquiera de una función o de un fichero *.m. La forma general de las funciones anónimas es la siguiente: fhandle = @(argumentos) expresión; Después de ser creada, la función anónima puede ser llamada a través del fhandle seguido de la lista de argumentos actuales entre paréntesis, o también puede ser pasada a otra función como argumento, también por medio del fhandle. Por ejemplo, la siguiente función anónima calcula el valor del seno del ángulo doble: senoAngDoble = @(ang)
+
+  --- Top 3 (Chunk 170 | Score 0.2231) ---
+  en la definición de una matriz o vector se pueden utilizar expresiones y funciones matemáticas). Por ejemplo, una sencilla operación con A es hallar su matriz traspuesta. En MATLAB el apóstrofo (') es el símbolo de transposición matricial. Para calcular A' (traspuesta de A) basta teclear lo siguiente (se añade a continuación la respuesta del programa): >> A' ans = 1 4 7 2 5 8 3 6 9 Como el resultado de la operación no ha sido asignado a ninguna otra matriz, MATLAB utiliza
+
+  --- Top 4 (Chunk 794 | Score 0.2024) ---
+  esto exige que se pasen como argumentos un par de vectores. En realidad, el conjunto básico de argumentos de esta función es una tripleta formada por dos vectores y una cadena de 1, 2 ó 3 caracteres que indica el color y el tipo de línea o de marker. En la tabla siguiente se pueden observar las distintas posibilidades. Símbolo Color Símbolo Marcadores (markers) y yellow . puntos m magenta o círculos c cyan x marcas en x r red + marcas en + g
+
+  --- Top 5 (Chunk 513 | Score 0.1931) ---
+  DE REFERENCIAS DE FUNCIÓN Ya se ha comentado que las referencias de función son un nuevo tipo de datos de MATLAB 6. Una referencia de función se puede crear de dos formas diferentes: 1. Mediante el operador @ ("at" o "arroba") La referencia a la función se crea precediendo el nombre de la función por el operador @. El resultado puede asignarse a una variable o pasarse como argumento a una función. Ejemplos: fh = @sin; area = quad(@sin, 0, pi); 2. Mediante la función
+
+======================================================
+PREGUNTA 30: ¿Cómo se calculan las raíces de un polinomio con roots y su polinomio característico con poly?
+RESPUESTA (Chunk #348 | Puntuacion BERT: 0.6293):
+de tercer grado: >> pol1=[1 -2 4] pol1 = 1 -2 4 >> pol2=[1 0 3 -4] pol2 = 1 0 3 -4 >> pol3=conv(pol1,pol2) pol3 = 1 -2 7 -10 20 -16 Para dividir polinomios existe otra función llamada deconv(). Las funciones orientadas al cálculo con polinomios son las siguientes: poly(A) polinomio característico de la matriz A roots(pol) raíces del polinomio pol polyval(pol,x) evaluación del polinomio pol para el valor de x. Si x es un vector, pol se evalúa para cada elemento de
+
+  --- Top 1 (Chunk 348 | Score 0.6293) ---
+  de tercer grado: >> pol1=[1 -2 4] pol1 = 1 -2 4 >> pol2=[1 0 3 -4] pol2 = 1 0 3 -4 >> pol3=conv(pol1,pol2) pol3 = 1 -2 7 -10 20 -16 Para dividir polinomios existe otra función llamada deconv(). Las funciones orientadas al cálculo con polinomios son las siguientes: poly(A) polinomio característico de la matriz A roots(pol) raíces del polinomio pol polyval(pol,x) evaluación del polinomio pol para el valor de x. Si x es un vector, pol se evalúa para cada elemento de
+
+  --- Top 2 (Chunk 346 | Score 0.4681) ---
+  weekday(t) devuelve el día de la semana para un serial date number t. now date datenum() calendar() 4.9. Funciones para cálculos con polinomios Para MATLAB un polinomio se puede definir mediante un vector de coeficientes. Por ejemplo, el polinomio: x42− 8x + 6x − 10 = 0                                                                             x (función        polyval()) y calcular las raíces (función roots()): >> pol=[1 0 -8 6 -10] pol = 1 0 -8 6 -10 >> roots(pol) ans = -3.2800 2.6748 0.3026 + 1.0238i 0.3026 - 1.0238i >> polyval(pol,1) ans
+
+  --- Top 3 (Chunk 303 | Score 0.4124) ---
+  MATLAB. Se clasificarán en varios subgrupos: 4.5.1. FUNCIONES MATRICIALES ELEMENTALES: B = A' calcula la traspuesta (conjugada) de la matriz A B = A.' calcula la traspuesta (sin conjugar) de la matriz A v = poly(A) devuelve un vector v con los coeficientes del polinomio característico de la matriz cuadrada A devuelve la traza t (suma de los elementos de la diagonal) de una matriz cuadrada A [m,n] = size(A) devuelve el número de filas m y de columnas n de una matriz rectangular A
+
+  --- Top 4 (Chunk 347 | Score 0.3388) ---
+  -8 6 -10] pol = 1 0 -8 6 -10 >> roots(pol) ans = -3.2800 2.6748 0.3026 + 1.0238i 0.3026 - 1.0238i >> polyval(pol,1) ans = -11 Para calcular producto de polinomios MATLAB utiliza una función llamada conv() (de producto de convolución). En el siguiente ejemplo se va a ver cómo se multiplica un polinomio de segundo grado por otro de tercer grado: >> pol1=[1 -2 4] pol1 = 1 -2 4 >> pol2=[1 0 3 -4] pol2 = 1 0 3 -4 >> pol3=conv(pol1,pol2)
+
+  --- Top 5 (Chunk 236 | Score 0.3162) ---
+  matriz especialmente difícil de manejar por los grandes errores numéricos a los que conduce crea directamente la inversa de la matriz de Hilbert produce una matriz con todos los productos de los elementos del vector x por los elementos del vector y. Equivalente a x'*y, donde x e y son vectores fila construye una matriz cuyo polinomio característico tiene como coeficientes los elementos del vector pol (ordenados de mayor grado a menor) construye la matriz de Vandermonde a partir del vector v (las columnas son
+
+======================================================
+PREGUNTA 31: ¿Cómo se ajusta un polinomio por mínimo error cuadrático medio con polyfit y se deriva con polyder?
+RESPUESTA (Chunk #350 | Puntuacion BERT: 0.6850):
+y en r el resto de la división descompone el cociente entre p1 y p2 en suma de fracciones simples (ver >>help residue) polyder(pol) calcula la derivada de un polinomio polyder(p1,p2) calcula la derivada de producto de polinomios polyfit(x,y,n) calcula los coeficientes de un polinomio p(x) de grado n que se ajusta a los datos p(x(i)) ~= y(i), en el sentido de mínimo error cuadrático medio. interp1(xp,yp,x) calcula el valor interpolado para la abscisa x a partir de un conjunto de puntos dado por los
+
+  --- Top 1 (Chunk 350 | Score 0.6850) ---
+  y en r el resto de la división descompone el cociente entre p1 y p2 en suma de fracciones simples (ver >>help residue) polyder(pol) calcula la derivada de un polinomio polyder(p1,p2) calcula la derivada de producto de polinomios polyfit(x,y,n) calcula los coeficientes de un polinomio p(x) de grado n que se ajusta a los datos p(x(i)) ~= y(i), en el sentido de mínimo error cuadrático medio. interp1(xp,yp,x) calcula el valor interpolado para la abscisa x a partir de un conjunto de puntos dado por los
+
+  --- Top 2 (Chunk 351 | Score 0.2539) ---
+  sentido de mínimo error cuadrático medio. interp1(xp,yp,x) calcula el valor interpolado para la abscisa x a partir de un conjunto de puntos dado por los vectores xp e yp. interp1(xp,yp,x,'m') como la anterior, pero permitiendo especificar también el método de interpolación. La cadena de caracteres m admite los valores 'nearest', 'linear', 'spline', 'pchip', 'cubic' y 'v5cubic'. residue(p1,p2) 5. OTROS TIPOS DE DATOS DE MATLAB En los capítulos precedentes se ha visto la “especialidad” de MATLAB: trabajar con vectores y matrices. En este capítulo se va
+
+  --- Top 3 (Chunk 349 | Score 0.1992) ---
+  del polinomio pol polyval(pol,x) evaluación del polinomio pol para el valor de x. Si x es un vector, pol se evalúa para cada elemento de x polyvalm(pol,A) evaluación del polinomio pol de la matriz A conv(p1,p2) producto de convolución de dos polinomios p1 y p2 [c,r]=deconv(p,q) división del polinomio p por el polinomio q. En c se devuelve el cociente y en r el resto de la división descompone el cociente entre p1 y p2 en suma de fracciones simples (ver >>help residue) polyder(pol) calcula
+
+  --- Top 4 (Chunk 803 | Score 0.1595) ---
+  sus opciones por defecto, que en algunas ocasiones puede interesar cambiar. El comando básico es el comando axis. Por defecto, MATLAB ajusta la escala de cada uno de los ejes de modo que varíe entre el mínimo y el máximo valor de los vectores a representar. Este es el llamado modo "auto", o modo automático. Para definir de modo explícito los valores máximo y mínimo según cada eje, se utiliza el comando: axis([xmin, xmax, ymin, ymax]) mientras que : axis('auto') devuelve el escalado de los
+
+  --- Top 5 (Chunk 421 | Score 0.1258) ---
+  a la derecha de una asignación produce resultados dispersos, mientras que a la izquierda de una asignación (=) mantiene el tipo de almacenamiento de S. 5.5.5. PERMUTACIONES DE FILAS Y/O COLUMNAS EN MATRICES SPARSE Para permutar las filas de una matriz se debe pre-multiplicar por una matriz de permutación P, que es una matriz que deriva de la matriz identidad I por permutación de filas y/o columnas. Así, el producto P*S permuta filas de la matriz S, mientras que S*P' permuta columnas. Un vector de
+
+======================================================
+PREGUNTA 32: ¿Cómo se calcula el valor interpolado de un conjunto de puntos con interp1?
+RESPUESTA (Chunk #351 | Puntuacion BERT: 0.6672):
+sentido de mínimo error cuadrático medio. interp1(xp,yp,x) calcula el valor interpolado para la abscisa x a partir de un conjunto de puntos dado por los vectores xp e yp. interp1(xp,yp,x,'m') como la anterior, pero permitiendo especificar también el método de interpolación. La cadena de caracteres m admite los valores 'nearest', 'linear', 'spline', 'pchip', 'cubic' y 'v5cubic'. residue(p1,p2) 5. OTROS TIPOS DE DATOS DE MATLAB En los capítulos precedentes se ha visto la “especialidad” de MATLAB: trabajar con vectores y matrices. En este capítulo se va
+
+  --- Top 1 (Chunk 351 | Score 0.6672) ---
+  sentido de mínimo error cuadrático medio. interp1(xp,yp,x) calcula el valor interpolado para la abscisa x a partir de un conjunto de puntos dado por los vectores xp e yp. interp1(xp,yp,x,'m') como la anterior, pero permitiendo especificar también el método de interpolación. La cadena de caracteres m admite los valores 'nearest', 'linear', 'spline', 'pchip', 'cubic' y 'v5cubic'. residue(p1,p2) 5. OTROS TIPOS DE DATOS DE MATLAB En los capítulos precedentes se ha visto la “especialidad” de MATLAB: trabajar con vectores y matrices. En este capítulo se va
+
+  --- Top 2 (Chunk 350 | Score 0.6308) ---
+  y en r el resto de la división descompone el cociente entre p1 y p2 en suma de fracciones simples (ver >>help residue) polyder(pol) calcula la derivada de un polinomio polyder(p1,p2) calcula la derivada de producto de polinomios polyfit(x,y,n) calcula los coeficientes de un polinomio p(x) de grado n que se ajusta a los datos p(x(i)) ~= y(i), en el sentido de mínimo error cuadrático medio. interp1(xp,yp,x) calcula el valor interpolado para la abscisa x a partir de un conjunto de puntos dado por los
+
+  --- Top 3 (Chunk 794 | Score 0.2786) ---
+  esto exige que se pasen como argumentos un par de vectores. En realidad, el conjunto básico de argumentos de esta función es una tripleta formada por dos vectores y una cadena de 1, 2 ó 3 caracteres que indica el color y el tipo de línea o de marker. En la tabla siguiente se pueden observar las distintas posibilidades. Símbolo Color Símbolo Marcadores (markers) y yellow . puntos m magenta o círculos c cyan x marcas en x r red + marcas en + g
+
+  --- Top 4 (Chunk 225 | Score 0.1816) ---
+  variable = expresión y segundo evaluando simplemente el resultado del siguiente modo, expresión en cuyo caso el resultado se asigna automáticamente a una variable interna de MATLAB llamada ans (de answer) que almacena el último resultado obtenido. Se considera por defecto que una expresión termina cuando se pulsa intro. Si se desea que una expresión continúe en la línea siguiente, hay que introducir tres puntos (...) antes de pulsar intro. También se pueden incluir varias expresiones en una misma línea separándolas por comas (,) o
+
+  --- Top 5 (Chunk 443 | Score 0.1775) ---
+  de C/C++/Java16, en MATLAB sólo se ejecuta uno de los bloques relacionado con un case. 6.1.3. SENTENCIA FOR La sentencia for repite un conjunto de sentencias un número predeterminado de veces. La sentencia for de MATLAB es muy diferente y no tiene la generalidad de la sentencia for de C/C++/Java. La siguiente construcción ejecuta sentencias con valores de i de 1 a n, variando de uno en uno. for i=1:n sentencias end o bien, for i=vectorValores sentencias end donde vectorValores es un vector con los
+
+======================================================
+PREGUNTA 33: ¿Cómo se calcula la integral definida de una función con quad?
+RESPUESTA (Chunk #508 | Puntuacion BERT: 0.6535):
+que la pueda ejecutar. A estas funciones que ejecutan otras funciones que se les pasan como argumentos se les llama funciones de función, y se analizan con más detalle en el apartado 6.10, a partir de la página 83. Por ejemplo, MATLAB dispone de una función llamada quad que calcula la integral definida de una función entre unos límites dados. La función quad es genérica, esto es calcula, mediante métodos numéricos, integrales definidas de una amplia variedad de funciones, pero para que pueda calcular dicha
+
+  --- Top 1 (Chunk 508 | Score 0.6535) ---
+  que la pueda ejecutar. A estas funciones que ejecutan otras funciones que se les pasan como argumentos se les llama funciones de función, y se analizan con más detalle en el apartado 6.10, a partir de la página 83. Por ejemplo, MATLAB dispone de una función llamada quad que calcula la integral definida de una función entre unos límites dados. La función quad es genérica, esto es calcula, mediante métodos numéricos, integrales definidas de una amplia variedad de funciones, pero para que pueda calcular dicha
+
+  --- Top 2 (Chunk 509 | Score 0.6352) ---
+  La función quad es genérica, esto es calcula, mediante métodos numéricos, integrales definidas de una amplia variedad de funciones, pero para que pueda calcular dicha integral hay que proporcionarle la función a integrar. Por ejemplo, para calcular la integral entre 0 y π de la función seno(x) se puede utilizar la sentencia: >> area=quad('sin',0,pi) area = 2.0000 La función quad ejecuta la función sin por medio de la función feval, que tiene la siguiente forma general: feval(funcname, arg1, arg2, arg3, ...) donde funcname es una
+
+  --- Top 3 (Chunk 594 | Score 0.5662) ---
+  definida de esta función entre dos valores de la abscisa x. En inglés, al cálculo numérico de integrales definidas se le llama quadrature. Sabiendo eso, no resulta extraño el comando con el cual se calcula el área comprendida bajo la función entre los puntos 0 y 1 (obsérvese que la referencia de la función a integrar se pasa por medio del operador @ precediendo al nombre de la función. También podría crearse una variable para ello): >> area = quad(@prueba, 0, 1) area = 29.8583
+
+  --- Top 4 (Chunk 589 | Score 0.4256) ---
+  muestra el path del directorio actual which func localiza una función llamada func lookfor palabra busca palabra en todas las primeras líneas de los ficheros *.m 6.10. Funciones de función Como ya se ha comentado al hablar de las referencias de función, en MATLAB existen funciones a las que hay que pasar como argumento el nombre de otras funciones, para que puedan ser llamadas desde dicha función. Así sucede por ejemplo si se desea calcular la integral definida de una función, resolver una ecuación no
+
+  --- Top 5 (Chunk 593 | Score 0.4248) ---
+  función que se acaba de crear. Para dibujar la función prueba, tecléense los siguientes comandos: >> x=-1:0.1:2; >> plot(x,prueba(x)) El resultado aparece en la Figura 31. Ya se está en condiciones de intentar hacer cálculos y pruebas con esta función. Figura 31. Función “prueba”. 6.10.1. INTEGRACIÓN NUMÉRICA DE FUNCIONES Lo primero que se va a hacer es calcular la integral definida de esta función entre dos valores de la abscisa x. En inglés, al cálculo numérico de integrales definidas se le llama quadrature. Sabiendo eso,
+
+======================================================
+PREGUNTA 34: ¿Qué funciones de MATLAB se utilizan para integrar sistemas de ecuaciones diferenciales rígidos y no rígidos, y cuál es el uso de ode45?
+RESPUESTA (Chunk #609 | Puntuacion BERT: 0.6829):
+(7), y para ello se va a trasformar en un sistema de 4 ecuaciones diferenciales de primer orden, de la forma siguiente: ⎧u⎫ ⎧ 0 ⎫ ⎧u⎫ ⎨⎪⎪v⎬⎪⎪ = ⎨⎪⎪− g⎬⎪⎪ −+c ()uv22 ⎨⎪⎪v⎬⎪⎪ (10) ⎪ x⎪ ⎪ u ⎪ m ⎪0⎪ ⎩⎪ y⎭⎪ ⎩⎪ v ⎭⎪ ⎩⎪0⎭⎪ MATLAB dispone de varias funciones para integrar sistemas de ecuaciones diferenciales ordinarias de primer orden, entre ellas ode23, que utiliza el método de Runge-Kutta de segundo/tercer orden, y ode45, que utiliza el método de Runge-Kutta-Fehlberg de cuarto/quinto
+
+  --- Top 1 (Chunk 609 | Score 0.6829) ---
+  (7), y para ello se va a trasformar en un sistema de 4 ecuaciones diferenciales de primer orden, de la forma siguiente: ⎧u⎫ ⎧ 0 ⎫ ⎧u⎫ ⎨⎪⎪v⎬⎪⎪ = ⎨⎪⎪− g⎬⎪⎪ −+c ()uv22 ⎨⎪⎪v⎬⎪⎪ (10) ⎪ x⎪ ⎪ u ⎪ m ⎪0⎪ ⎩⎪ y⎭⎪ ⎩⎪ v ⎭⎪ ⎩⎪0⎭⎪ MATLAB dispone de varias funciones para integrar sistemas de ecuaciones diferenciales ordinarias de primer orden, entre ellas ode23, que utiliza el método de Runge-Kutta de segundo/tercer orden, y ode45, que utiliza el método de Runge-Kutta-Fehlberg de cuarto/quinto
+
+  --- Top 2 (Chunk 615 | Score 0.6334) ---
+  función del tiempo). Figura 32. Tiro parabólico (posición vertical MATLAB dispone de varias funciones para la integraen función del tiempo). ción de sistemas de ecuaciones diferenciales ordinarias. Se pueden citar las siguientes, clasificadas según una característica de las ecuaciones que se desea integrar: Sistemas no-rígidos ode23, ode45 y ode113 Sistemas rígidos ode15s, ode23s, odq23t y ode23tb La rigidez (stiffness, en la literatura inglesa) es una característica de muchos sistemas de ecuaciones diferenciales ordinarias que aparecen en la práctica y que los hace más difíciles de
+
+  --- Top 3 (Chunk 614 | Score 0.4003) ---
+  controlados por la función ode45 y no por el usuario, por lo que de ordinario no estarán igualmente espaciados. La matriz de resultados Y contiene cuatro columnas (las dos velocidades y las dos coordenadas de cada posición) y tantas filas como elementos tiene el vector t. En la Figura 32 se muestra el resultado del ejemplo anterior (posición vertical en función del tiempo). Figura 32. Tiro parabólico (posición vertical MATLAB dispone de varias funciones para la integraen función del tiempo). ción de sistemas de ecuaciones
+
+  --- Top 4 (Chunk 618 | Score 0.3011) ---
+  la forma indicada en la ecuación (7). En la solución de un sistema de ecuaciones diferenciales ordinarias aparecen combinadas diversas componentes oscilatorias (tipo seno, coseno o similar). Algunas de estas componentes oscilan más rápidamente que otras (tienen una frecuencia más elevada). Los problemas rígidos o stiff son aquellos en cuya solución participan componentes de frecuencias muy diferentes (muy altas y muy bajas). Todos los integradores de MATLAB tienen control automático del error. Quiere esto decir que el usuario fija el error que está dispuesto a
+
+  --- Top 5 (Chunk 608 | Score 0.2741) ---
+  la velocidad. Se supone que dicha fuerza responde a la siguiente expresión vectorial: ⎨⎧Fx ⎬⎫ =−cx()22+y⎨⎧x⎬⎫ (8) ⎩Fy ⎭ ⎩y⎭ donde c es una constante conocida. Las ecuaciones diferenciales del movimiento serán: ⎨⎬⎧⎫⎩⎭xy =−m1 ⎜⎟⎛⎞⎝⎠⎨⎧⎩−mg0 ⎬⎫⎭cx()22+y xy ⎨⎬⎧⎫⎩⎭ (9) pero éste es un sistema de 2 ecuaciones diferenciales de orden 2. Para poderlo integrar debe tener la forma del sistema (7), y para ello se va a trasformar en un sistema de 4 ecuaciones diferenciales de primer orden, de la forma siguiente: ⎧u⎫ ⎧ 0
+
+======================================================
+PREGUNTA 35: ¿Cómo operan las funciones sum, max y min sobre vectores, matrices e hipermatrices?
+RESPUESTA (Chunk #374 | Puntuacion BERT: 0.6490):
+operan sobre vectores (sum(), max(), etc.) se aplican a matrices e hipermatrices según la primera dimensión, resultando un array de una dimensión inferior. 3. Las funciones matriciales propias del Álgebra Lineal (det(), inv(), etc.) no se pueden aplicar a hipermatrices. Para poderlas aplicar hay que extraer primero las matrices correspondientes (por ejemplo, con el operador dos puntos (:)). 5.3. Estructuras Una estructura (struct) es una agrupación de datos de tipo diferente bajo un mismo nombre. Estos datos se llaman miembros (members) o campos (fields). Una
+
+  --- Top 1 (Chunk 374 | Score 0.6490) ---
+  operan sobre vectores (sum(), max(), etc.) se aplican a matrices e hipermatrices según la primera dimensión, resultando un array de una dimensión inferior. 3. Las funciones matriciales propias del Álgebra Lineal (det(), inv(), etc.) no se pueden aplicar a hipermatrices. Para poderlas aplicar hay que extraer primero las matrices correspondientes (por ejemplo, con el operador dos puntos (:)). 5.3. Estructuras Una estructura (struct) es una agrupación de datos de tipo diferente bajo un mismo nombre. Estos datos se llaman miembros (members) o campos (fields). Una
+
+  --- Top 2 (Chunk 373 | Score 0.6406) ---
+  Respecto al resto de las funciones de MATLAB, se pueden establecer las siguientes reglas para su aplicación a hipermatrices: 1. Todas las funciones de MATLAB que operan sobre escalares (sin(), cos(), etc.) se aplican sobre hipermatrices elemento a elemento (igual que sobre vectores y matrices). Las operaciones con escalares también se aplican de la misma manera. 2. Las funciones que operan sobre vectores (sum(), max(), etc.) se aplican a matrices e hipermatrices según la primera dimensión, resultando un array de una dimensión inferior. 3. Las
+
+  --- Top 3 (Chunk 302 | Score 0.5022) ---
+  a cada columna de la matriz considerada como vector. Si estas funciones se quieren aplicar a las filas de la matriz basta aplicar dichas funciones a la matriz traspuesta. min(x) sum(x) cumsum(x) 4.5. Funciones que actúan sobre matrices Las siguientes funciones exigen que el/los argumento/s sean matrices. En este grupo aparecen algunas de las funciones más útiles y potentes de MATLAB. Se clasificarán en varios subgrupos: 4.5.1. FUNCIONES MATRICIALES ELEMENTALES: B = A' calcula la traspuesta (conjugada) de la matriz A B = A.' calcula
+
+  --- Top 4 (Chunk 322 | Score 0.4141) ---
+  mismo que norm(A). norm(A,1) norma-1 de A, máxima suma de valores absolutos por columnas, es decir: max(sum(abs((A)))). norm(A,inf) norma-∞ de A, máxima suma de valores absolutos por filas, es decir: max(sum(abs((A')))). Normas de vectores: norm(x,p) norma-p, es decir sum(abs(x)^p)^(1/p). norm(x) norma-2 ó norma euclídea; equivale al módulo o norm(x,2). norm(x,inf) norma-∞, es decir max(abs(x)). norm(x,1) norma-1, es decir sum(abs(x)). B = null(A,'r') Q = orth(A) – c = cond(A) c = condest(A) – 4.5.4. FUNCIÓN LINSOLVE() La función linsolve es la forma más eficiente de
+
+  --- Top 5 (Chunk 419 | Score 0.4128) ---
+  devuelven un escalar o un vector siempre devuelven un vector lleno, aunque el argumento sea disperso 2. Las funciones que aceptan como argumentos escalares o vectores y devuelven matrices devuelven matrices llenas 3. Las funciones de un solo argumento que reciben una matriz y devuelven una matriz o vector conservan el carácter del argumento (disperso o lleno). Ej: chol(), diag(), max(), sum() 4. Las funciones binarias devuelven resultados dispersos si ambos argumentos son dispersos. Si un operando es lleno devuelven lleno, excepto si la operación
+
+======================================================
+PREGUNTA 36: ¿Cómo se buscan los índices de elementos de vectores que cumplen una condición con find, any y all?
+RESPUESTA (Chunk #333 | Puntuacion BERT: 0.5279):
+cualquier valor distinto de cero equivale a true, mientras que un valor cero equivale a false. Algunas de estas funciones son: any(x) función vectorial; chequea si alguno de los elementos del vector x cumple una determinada condición (en este caso ser distinto de cero). Devuelve un uno ó un cero se aplica por separado a cada columna de la matriz A. El resultado es un vector de unos y ceros all(x) función vectorial; chequea si todos los elementos del vector x cumplen una condición. Devuelve
+
+  --- Top 1 (Chunk 333 | Score 0.5279) ---
+  cualquier valor distinto de cero equivale a true, mientras que un valor cero equivale a false. Algunas de estas funciones son: any(x) función vectorial; chequea si alguno de los elementos del vector x cumple una determinada condición (en este caso ser distinto de cero). Devuelve un uno ó un cero se aplica por separado a cada columna de la matriz A. El resultado es un vector de unos y ceros all(x) función vectorial; chequea si todos los elementos del vector x cumplen una condición. Devuelve
+
+  --- Top 2 (Chunk 334 | Score 0.5089) ---
+  A. El resultado es un vector de unos y ceros all(x) función vectorial; chequea si todos los elementos del vector x cumplen una condición. Devuelve un uno ó un cero se aplica por separado a cada columna de la matriz A. El resultado es un vector de unos y ceros busca índices correspondientes a elementos de vectores que cumplen una determinada condición. El resultado es un vector con los índices de los elementos que cumplen la condición cuando esta función se aplica a una matriz
+
+  --- Top 3 (Chunk 335 | Score 0.4778) ---
+  determinada condición. El resultado es un vector con los índices de los elementos que cumplen la condición cuando esta función se aplica a una matriz la considera como un vector con una columna detrás de otra, de la 1a a la última. A continuación se verán algunos ejemplos de utilización de estas funciones. >> A=magic(3) A = 8 1 6 3 5 7 4 9 2 >> m=find(A>4) m = 1 5 6 7 8 Ahora se van a sustituir los elementos que cumplen la
+
+  --- Top 4 (Chunk 337 | Score 0.4184) ---
+  en un vector del mismo tamaño que m. Para chequear si hay algún elemento de un determinado valor –por ejemplo 3– puede hacerse lo siguiente: any(A) all(A) find(x) find(A) >> any(A==3) ans = 1 0 0 >> any(ans) ans = 1 mientras que para comprobar que todos los elementos de A son mayores que cero: >> all(all(A)) ans = 1 En este caso no ha hecho falta utilizar el operador relacional porque cualquier elemento distinto de cero equivale a true. La función isequal(A, B) devuelve
+
+  --- Top 5 (Chunk 336 | Score 0.3389) ---
+  3 5 7 4 9 2 >> m=find(A>4) m = 1 5 6 7 8 Ahora se van a sustituir los elementos que cumplen la condición anterior por valores de 10. Obsérvese cómo se hace y qué resultado se obtiene: >> A(m)=10*ones(size(m)) A = 10 1 10 3 10 10 4 10 2 donde ha sido necesario convertir el 10 en un vector del mismo tamaño que m. Para chequear si hay algún elemento de un determinado valor –por ejemplo 3– puede hacerse lo siguiente:
+
+======================================================
+PREGUNTA 37: ¿Para qué sirven los operadores lógicos breves && y || combinados con operadores relacionales?
+RESPUESTA (Chunk #276 | Puntuacion BERT: 0.7162):
+comprobar el cumplimiento de condiciones múltiples. Más adelante se verán otros ejemplos y ciertas funciones de las que dispone MATLAB para facilitar la aplicación de estos operadores a vectores y matrices. Los operadores lógicos breves (&&) y (||) se utilizan para simplificar las operaciones de comparación evitando operaciones innecesarias, pero también para evitar ciertos errores que se producirían en caso de evaluar incondicionalmente el segundo argumento. Considérese por ejemplo la siguiente sentencia, que evita una división por cero: r = (b~=0) && (a/b>0); && |
+
+  --- Top 1 (Chunk 276 | Score 0.7162) ---
+  comprobar el cumplimiento de condiciones múltiples. Más adelante se verán otros ejemplos y ciertas funciones de las que dispone MATLAB para facilitar la aplicación de estos operadores a vectores y matrices. Los operadores lógicos breves (&&) y (||) se utilizan para simplificar las operaciones de comparación evitando operaciones innecesarias, pero también para evitar ciertos errores que se producirían en caso de evaluar incondicionalmente el segundo argumento. Considérese por ejemplo la siguiente sentencia, que evita una división por cero: r = (b~=0) && (a/b>0); && |
+
+  --- Top 2 (Chunk 329 | Score 0.2845) ---
+  Tabla 1 se observa que, en la actual versión de MATLAB, sólo se admiten matrices simétricas que son al mismo tiempo definidas positivas. Para concluir este apartado, considérense los ejemplos siguientes: >> opts.LT=true; x=linsolve(L,b,opts); >> clear opts; opts.SYM=true; opts.POSDEF=true; x=linsolve(A,b,opts); Obsérvese que, antes de realizar una nueva ejecución se han borrado las opciones utilizadas en la ejecución anterior. 4.6. Más sobre operadores relacionales con vectores y matrices Cuando alguno de los operadores relacionales vistos previamente (<, >, <=, >=, == y ∼=) actúa entre dos
+
+  --- Top 3 (Chunk 277 | Score 0.2555) ---
+  de evaluar incondicionalmente el segundo argumento. Considérese por ejemplo la siguiente sentencia, que evita una división por cero: r = (b~=0) && (a/b>0); && | || 11 El carácter (~) se obtiene en los PCs pulsando sucesivamente las teclas 1, 2 y 6 manteniendo Alt pulsada. 4. FUNCIONES DE LIBRERÍA MATLAB tiene un gran número de funciones incorporadas. Algunas son funciones intrínsecas, esto es, funciones incorporadas en el propio código ejecutable del programa. Estas funciones son particularmente rápidas y eficientes. Existen además funciones definidas en
+
+  --- Top 4 (Chunk 270 | Score 0.2505) ---
+  siguiente sección) y de funciones programadas por el usuario (que también se verán más adelante). 3.6. Operadores relacionales El lenguaje de programación de MATLAB dispone de los siguientes operadores relacionales: < menor que > mayor que <= menor o igual que >= mayor o igual que == igual que ~= distinto que11 Obsérvese que, salvo el último de ellos, coinciden con los correspondientes operadores relacionales de C. Sin embargo, ésta es una coincidencia más bien formal. En MATLAB los operadores relacionales pueden aplicarse a vectores
+
+  --- Top 5 (Chunk 275 | Score 0.2497) ---
+  breve: si el primer operando es true ya no se evalúa el segundo, pues el resultado final no puede ser más que true. ~ negación lógica (función equivalente: not(A)) xor(A,B) realiza un "or exclusivo", es decir, devuelve 0 en el caso en que ambos sean 1 ó ambos sean 0. Los operadores lógicos se combinan con los relacionales para poder comprobar el cumplimiento de condiciones múltiples. Más adelante se verán otros ejemplos y ciertas funciones de las que dispone MATLAB para facilitar la aplicación de
+
+======================================================
+PREGUNTA 38: ¿Cómo se mide el tiempo necesario para ejecutar un cálculo con tic, toc, clock y cputime?
+RESPUESTA (Chunk #162 | Puntuacion BERT: 0.7231):
+modo de ejemplo, el siguiente código mide de varias formas el tiempo necesario para resolver un sistema de 1000 ecuaciones con 1000 incógnitas. Téngase en cuenta que los tiempos pequeños (del orden de las décimas o centésimas de segundo), no se pueden medir con gran precisión. >> n=1000; A=rand(n); b=rand(n,1); x=zeros(n,1); >> tiempoIni=clock; x=A\b; tiempo=etime(clock, tiempoIni) >> time=cputime; x=A\b; time=cputime-time >> tic; x=A\b; toc donde se han puesto varias sentencias en la misma línea para que se ejecuten todas sin tiempos muertos al pulsar intro.
+
+  --- Top 1 (Chunk 162 | Score 0.7231) ---
+  modo de ejemplo, el siguiente código mide de varias formas el tiempo necesario para resolver un sistema de 1000 ecuaciones con 1000 incógnitas. Téngase en cuenta que los tiempos pequeños (del orden de las décimas o centésimas de segundo), no se pueden medir con gran precisión. >> n=1000; A=rand(n); b=rand(n,1); x=zeros(n,1); >> tiempoIni=clock; x=A\b; tiempo=etime(clock, tiempoIni) >> time=cputime; x=A\b; time=cputime-time >> tic; x=A\b; toc donde se han puesto varias sentencias en la misma línea para que se ejecuten todas sin tiempos muertos al pulsar intro.
+
+  --- Top 2 (Chunk 161 | Score 0.6872) ---
+  puede saber el tiempo de CPU empleado en esa operación. Este tiempo sigue corriendo aunque MATLAB esté inactivo. etime(t2, t1) tiempo transcurrido entre los vectores t1 y t2 (¡atención al orden!), obtenidos como respuesta al comando clock. imprime el tiempo en segundos requerido por ops. El comando tic pone el reloj a cero y toc obtiene el tiempo transcurrido. A modo de ejemplo, el siguiente código mide de varias formas el tiempo necesario para resolver un sistema de 1000 ecuaciones con 1000 incógnitas. Téngase en
+
+  --- Top 3 (Chunk 164 | Score 0.3582) ---
+  impresión de resultados. Conviene ejecutar dos o tres veces cada sentencia para obtener tiempos óptimos, ya que la primera vez que se ejecutan se emplea un cierto tiempo en cargar las funciones a memoria. tic ops toc 3. OPERACIONES CON MATRICES Y VECTORES Ya se ha comentado que MATLAB es fundamentalmente un programa para cálculo matricial. Inicialmente se utilizará MATLAB como programa interactivo, en el que se irán definiendo las matrices, los vectores y las expresiones que los combinan y obteniendo los resultados sobre la
+
+  --- Top 4 (Chunk 163 | Score 0.2733) ---
+  >> tic; x=A\b; toc donde se han puesto varias sentencias en la misma línea para que se ejecuten todas sin tiempos muertos al pulsar intro. Esto es especialmente importante en la línea de comandos en la que se quiere medir los tiempos. Todas las sentencias de cálculos matriciales van seguidas de punto y coma (;) con objeto de evitar la impresión de resultados. Conviene ejecutar dos o tres veces cada sentencia para obtener tiempos óptimos, ya que la primera vez que se ejecutan se emplea
+
+  --- Top 5 (Chunk 210 | Score 0.2623) ---
+  qué tipo de variable se rata se pueden utilizar las funciones isa(x, 'single') ó isa(x, 'double'). Obsérvese el ejemplo siguiente, en el que se ve cómo con variables single se reduce el tiempo de CPU y la memoria: >> n=1000; AA=rand(n); A=single(AA); >> tic, Bs=inv(A); toc Elapsed time is 1.985000 seconds. >> tic, Bd=inv(AA); toc Elapsed time is 4.296000 seconds. Quizás las variables más interesantes –aparte de las variables por defecto, las double– sean las variables logical, que sólo pueden tomar los valores true (1)
+
+======================================================
+PREGUNTA 39: ¿Cómo se depura un fichero paso a paso con Step, Step In, Step Out y Breakpoints en el Debugger?
+RESPUESTA (Chunk #123 | Puntuacion BERT: 0.6795):
+de estos botones, que aparece al colocar sobre ellos el cursor, es el siguiente: Set/Clear Breakpoint. Coloca o borra un breakpoint en la línea en que está el cursor. Clear All Breakpoints. Elimina todos los breakpoints que haya en el fichero. Step. Avanzar un paso sin entrar en las funciones de usuario llamadas en esa línea. Step In. Avanzar un paso, y si en ese paso hay una llamada a una función cuyo fichero *.m está accesible, entra en dicha función. Step Out. Salir de
+
+  --- Top 1 (Chunk 123 | Score 0.6795) ---
+  de estos botones, que aparece al colocar sobre ellos el cursor, es el siguiente: Set/Clear Breakpoint. Coloca o borra un breakpoint en la línea en que está el cursor. Clear All Breakpoints. Elimina todos los breakpoints que haya en el fichero. Step. Avanzar un paso sin entrar en las funciones de usuario llamadas en esa línea. Step In. Avanzar un paso, y si en ese paso hay una llamada a una función cuyo fichero *.m está accesible, entra en dicha función. Step Out. Salir de
+
+  --- Top 2 (Chunk 124 | Score 0.6476) ---
+  paso, y si en ese paso hay una llamada a una función cuyo fichero *.m está accesible, entra en dicha función. Step Out. Salir de la función que se está ejecutando en ese momento. Continue. Continuar la ejecución hasta el siguiente breakpoint. Quit Debugging. Terminar la ejecución del Debugger. Stack. En la parte derecha de la barra de herramientas aparece esta lista desplegable (visible en la Figura 21 con las letras Pru...) mediante la cual se puede elegir el contexto, es decir el espacio de
+
+  --- Top 3 (Chunk 765 | Score 0.2611) ---
+  se ha cargado el fichero MEX o el nombre del fichero, en cualquier caso MATLAB solicitará la información que necesite. En este momento se esta listo para comenzar a depurar. Se puede editar el código fuente del fichero MEX y poner breakpoints. Es conveniente poner un breakpoint al comienzo de la mexFunction. Para continuar después de un breakpoint se emplea el siguiente comando. <dbx> cont Cuando el debugger esta parado en un breakpoint es posible utilizar todas las capacidades del debugger para examinar variables, mostrar
+
+  --- Top 4 (Chunk 120 | Score 0.2541) ---
+  bifurcaciones de las sentencias seleccionadas. La Figura 21 corresponde a una ejecución de este fichero de comandos controlada con el Debugger. Dicha ejecución se comienza eligiendo el comando Run en el menú Debug, pulsando la tecla F5, clicando en el botón Continue ( ) de la barra de herramientas del Editor o tecleando el nombre del fichero en la línea de comandos de la Command Window. Los puntos rojos que aparecen en el margen izquierdo son breakpoints (puntos en los que se detiene la ejecución
+
+  --- Top 5 (Chunk 130 | Score 0.2263) ---
+  Evaluate Selection, Open Selection y Help on Selection, que son muy útiles para comprobar, ver o recibir ayuda sobre la función seleccionada. MATLAB permite también introducir breakpoints condicionales (indicados con un punto amarillo, en vez de rojo), en los que el programa se para sólo si se cumple una determinada condición. Para introducir un breakpoint condicional basta clicar con el botón derecho en la correspondiente línea del código en la ventana del Editor/Debugger y elegir en el menú contextual que resulta Set/Modify Conditional Breakpoint. Se
+
+======================================================
+PREGUNTA 40: ¿Cómo funciona la construcción try, catch y end para gestionar errores en tiempo de ejecución?
+RESPUESTA (Chunk #449 | Puntuacion BERT: 0.6601):
+ejecución del bucle for y/o while más interno de los que comprenden a dicha sentencia. 6.1.6. SENTENCIA CONTINUE La sentencia continue hace que se pase inmediatamente a la siguiente iteración del bucle for o while, saltando todas las sentencias que hay entre el continue y el fin del bucle en la iteración actual. 6.1.7. SENTENCIAS TRY...CATCH...END La construcción try...catch...end permite gestionar los errores que se pueden producir en tiempo de ejecución. Su forma es la siguiente: try sentencias1 catch sentencias2 end En el caso de
+
+  --- Top 1 (Chunk 449 | Score 0.6601) ---
+  ejecución del bucle for y/o while más interno de los que comprenden a dicha sentencia. 6.1.6. SENTENCIA CONTINUE La sentencia continue hace que se pase inmediatamente a la siguiente iteración del bucle for o while, saltando todas las sentencias que hay entre el continue y el fin del bucle en la iteración actual. 6.1.7. SENTENCIAS TRY...CATCH...END La construcción try...catch...end permite gestionar los errores que se pueden producir en tiempo de ejecución. Su forma es la siguiente: try sentencias1 catch sentencias2 end En el caso de
+
+  --- Top 2 (Chunk 450 | Score 0.6396) ---
+  gestionar los errores que se pueden producir en tiempo de ejecución. Su forma es la siguiente: try sentencias1 catch sentencias2 end En el caso de que durante la ejecución del bloque sentencias1 se produzca un error, el control de la ejecución se transfiere al bloque sentencias2. Si la ejecución transcurriera normalmente, sentencias2 no se ejecutaría nunca. MATLAB dispone de una función lasterr que devuelve una cadena de caracteres con el mensaje correspondiente al último error que se ha producido. En la forma lasterr('') pone a
+
+  --- Top 3 (Chunk 684 | Score 0.3511) ---
+  argumento a la función eval: for n = 1:10 eval(['A',num2str(n),' = magic(n)']) end La función eval() se puede usar también en la forma eval('tryString', 'catchString'). En este caso se evalúa la cadena 'tryString', y si se produce algún error se evalúa la cadena 'catchString'. Es una forma simplificada de gestionar errores en tiempo de ejecución. La función T=evalc() es similar a eval() pero con la diferencia de que cualquier salida que la expresión pasada como argumento hubiera enviado a la ventana de comandos de MATLAB
+
+  --- Top 4 (Chunk 531 | Score 0.2655) ---
+  por medio de la función str2func, MATLAB dispone de la función func2str que realiza la conversión inversa. Puede ser interesante convertir una referencia de función en cadena de caracteres para construir mensajes de error en relación con construcciones try...catch. Otras funciones que pueden utilizarse en relación con las referencias de función son las siguientes (se presentas mediante ejemplos): isa(unaVariable, 'function_handle') Función que devuelve "1" ó "0" según unaVariable sea o no una referencia de función. Esta función se podría utilizar dentro de una función de
+
+  --- Top 5 (Chunk 578 | Score 0.2028) ---
+  De esta forma siempre se construye sobre algo que ya ha sido comprobado y que funciona: si aparece algún error, lo más probable es que se deba a lo último que se ha añadido, y de esta manera la búsqueda de errores está acotada y es mucho más sencilla. Recuérdese que de ordinario el tiempo de corrección de errores en un programa puede ser 4 ó 5 veces superior al tiempo de programación. El debugger es una herramienta muy útil a la hora de acortar
+
+======================================================
+PREGUNTA 41: ¿Qué son las variables locales y las variables persistentes declaradas con persistent?
+RESPUESTA (Chunk #501 | Puntuacion BERT: 0.6433):
+locales de una función se crean y destruyen cada vez que se ejecuta la función. Las variables persistentes se pueden definir en funciones, pero no en ficheros de comandos. Es habitual utilizar para ellas letras mayúsculas. Las variables se declaran como persistentes utilizando la palabra persistent seguida de los nombres separados por blancos, como por ejemplo: >> persistent VELOCIDAD TIEMPO Las variables persistent se inicializan a la matriz vacía [] y permanecen en memoria hasta que se hace clear de la función o cuando se
+
+  --- Top 1 (Chunk 501 | Score 0.6433) ---
+  locales de una función se crean y destruyen cada vez que se ejecuta la función. Las variables persistentes se pueden definir en funciones, pero no en ficheros de comandos. Es habitual utilizar para ellas letras mayúsculas. Las variables se declaran como persistentes utilizando la palabra persistent seguida de los nombres separados por blancos, como por ejemplo: >> persistent VELOCIDAD TIEMPO Las variables persistent se inicializan a la matriz vacía [] y permanecen en memoria hasta que se hace clear de la función o cuando se
+
+  --- Top 2 (Chunk 500 | Score 0.4840) ---
+  *.m y permiten ocultar el código de los ficheros ASCII correspondientes a las funciones *.m de MATLAB. 6.3.10. VARIABLES PERSISTENTES Las variables persistentes son variables locales de las funciones (pertenecen al espacio de trabajo de la función y sólo son visibles en dicho espacio de trabajo), que conservan su valor entre distintas llamadas a la función. Por defecto, las variables locales de una función se crean y destruyen cada vez que se ejecuta la función. Las variables persistentes se pueden definir en funciones, pero no
+
+  --- Top 3 (Chunk 499 | Score 0.3560) ---
+  func.m es un fichero func.p en el directorio actual (el fichero func.m puede estar en cualquier directorio del search path). El comando pcode -inplace func.m crea el fichero func.p en el mismo directorio donde encuentra el fichero func.m. Pueden pasarse varios ficheros *.m al comando pcode de una sola vez. Los ficheros *.p se ejecutan algo más rápidamente que los *.m y permiten ocultar el código de los ficheros ASCII correspondientes a las funciones *.m de MATLAB. 6.3.10. VARIABLES PERSISTENTES Las variables persistentes son variables
+
+  --- Top 4 (Chunk 475 | Score 0.2169) ---
+  el programa principal como en las distintas funciones que deben acceder a su valor. Es frecuente utilizar el convenio de usar para las variables globales nombres largos (más de 5 letras) y con mayúsculas. Por razones de eficiencia, los argumentos que recibe una función de MATLAB no se copian a variables locales si no son modificados por dicha función (en términos de C/C++ se diría que se pasan por referencia). Esto tiene importantes consecuencias en términos de eficiencia y ahorro de tiempo de cálculo. Sin
+
+  --- Top 5 (Chunk 550 | Score 0.2149) ---
+  ven y pueden modificar las variables locales definidas en sus funciones anidadas, siempre que definan o usen dichas variables. Como regla general, una variable usada o definida en una función anidada pertenece al espacio de trabajo de la función contenedora más exterior que de alguna manera accede a dicha variable. 4. Como consecuencia de lo dicho, si una función contenedora no usa o define una variable, pero esa variable es definida por dos funciones anidadas al mismo nivel en dicha función, dichas variables en las
+
+======================================================
+PREGUNTA 42: ¿Cómo se cambia el formato numérico en pantalla con format long, format compact y format loose?
+RESPUESTA (Chunk #139 | Puntuacion BERT: 0.6622):
+científica o decimal, dependiendo del valor long e notación científica con 15 decimales long g notación científica o decimal, dependiendo del valor rational expresa los números racionales como cocientes de enteros Estos formatos se pueden cambiar también desde la línea de comandos anteponiendo la palabra format. Por ejemplo, para ver las matrices en formato long habrá que ejecutar el comando: >> format long Por otra parte, el formato loose introduce algunas líneas en blanco en la salida (opción por defecto), mientras que el formato compact
+
+  --- Top 1 (Chunk 139 | Score 0.6622) ---
+  científica o decimal, dependiendo del valor long e notación científica con 15 decimales long g notación científica o decimal, dependiendo del valor rational expresa los números racionales como cocientes de enteros Estos formatos se pueden cambiar también desde la línea de comandos anteponiendo la palabra format. Por ejemplo, para ver las matrices en formato long habrá que ejecutar el comando: >> format long Por otra parte, el formato loose introduce algunas líneas en blanco en la salida (opción por defecto), mientras que el formato compact
+
+  --- Top 2 (Chunk 140 | Score 0.6205) ---
+  >> format long Por otra parte, el formato loose introduce algunas líneas en blanco en la salida (opción por defecto), mientras que el formato compact elimina las líneas en blanco citadas (es la opción recomendada en este manual). Estas opciones están disponibles en el cuadro de diálogo de la Figura 25 y se pueden también establecer desde la línea de comandos en la forma: >> format compact El cuadro de diálogo de la Figura 26 permite elegir un editor de programas distinto del que trae
+
+  --- Top 3 (Chunk 141 | Score 0.2192) ---
+  comandos en la forma: >> format compact El cuadro de diálogo de la Figura 26 permite elegir un editor de programas distinto del que trae MATLAB (built-in editor), así como obligar a que los ficheros se abran de modo automático al ejecutarlos con el Debugger. Figura 25. Cuadro de diálogo Prefs./Command Window. Figura 26. Cuadro de diálogo Prefs./Editor&Debugger. MATLAB aplica un factor de escala general a las matrices cuando los elementos no enteros más grandes o más pequeños son superiores o inferiores a una determinada
+
+  --- Top 4 (Chunk 469 | Score 0.2114) ---
+  activa el echo en todas las funciones echo off all desactiva el echo de todas las funciones Mención especial merece el fichero de comandos startup.m (ver apartado 2.7). Este fichero se ejecuta cada vez que se entra en MATLAB. En él puede introducir todos aquellos comandos que le interesa se ejecuten siempre al iniciar la sesión, por ejemplo format compact y los comandos necesarios para modificar el path. 6.3.2. DEFINICIÓN DE FUNCIONES La primera línea de un fichero llamado name.m que define una función tiene
+
+  --- Top 5 (Chunk 52 | Score 0.2083) ---
+  formato de pantalla fácilmente navegable Figura 7. Demos disponibles en MATLAB. (con apartados de Getting Started, User Guides, Programming Tips y Examples in Documentation), Product Demos (con una colección de jemplos programados que se pueden ejecutar y cuyo código se puede examinar para ver cómo están programados), What's New (con las novedades de esta versión respecto a la anterior), Printing the Documentation Set (que permite abrir documentos PDF (Portable Document Format), que se corrresponden con las versiones en papel de los manuales del programa, y
+
+======================================================
+PREGUNTA 43: ¿Cómo se forma una matriz de números aleatorios entre 0 y 1 con distribución uniforme o normal?
+RESPUESTA (Chunk #234 | Puntuacion BERT: 0.6299):
+igualmente espaciados entre x1 y x2 logspace(d1,d2,n) genera un vector con n valores espaciados logarítmicamente entre 10^d1 y 10^d2. Si d2 es pi9, los puntos se generan entre 10^d1 y pi forma una matriz de números aleatorios entre 0 y 1, con distribución uniforme, de tamaño (3×3) idem de tamaño (2×5) forma una matriz de números aleatorios de tamaño (4×4), con distribución normal, de valor medio 0 y varianza 1. crea una matriz (4×4) con los números 1, 2, ... 4*4, con la propiedad de
+
+  --- Top 1 (Chunk 234 | Score 0.6299) ---
+  igualmente espaciados entre x1 y x2 logspace(d1,d2,n) genera un vector con n valores espaciados logarítmicamente entre 10^d1 y 10^d2. Si d2 es pi9, los puntos se generan entre 10^d1 y pi forma una matriz de números aleatorios entre 0 y 1, con distribución uniforme, de tamaño (3×3) idem de tamaño (2×5) forma una matriz de números aleatorios de tamaño (4×4), con distribución normal, de valor medio 0 y varianza 1. crea una matriz (4×4) con los números 1, 2, ... 4*4, con la propiedad de
+
+  --- Top 2 (Chunk 235 | Score 0.5851) ---
+  con distribución normal, de valor medio 0 y varianza 1. crea una matriz (4×4) con los números 1, 2, ... 4*4, con la propiedad de que todas las filas y columnas suman lo mismo crea una matriz de Hilbert de tamaño (5×5). La matriz de Hilbert es una matriz cuyos elementos (i,j) responden a la expresión (1/(i+j-1)). Esta es una matriz especialmente difícil de manejar por los grandes errores numéricos a los que conduce crea directamente la inversa de la matriz de Hilbert produce una
+
+  --- Top 3 (Chunk 404 | Score 0.3620) ---
+  elementos distintos de cero spones(S) Reemplazar los elementos distintos de cero por unos spalloc(m,n,nzmax) Reserva espacio para una matriz dispersa m×n issparse(S) Devuelve true si el argumento es una matriz dispersa Matriz aleatoria dispersa con distribución normal Matriz aleatoria simétrica Matriz dispersa a partir de las diagonales de otra matriz Crea una matriz dispersa de tamaño m×n con todos los elementos cero Crea una matriz dispersa a partir de una matriz llena full(S) find(S) 5.5.2. OPERACIONES CON MATRICES DISPERSAS Las matrices dispersas son más “delicadas”
+
+  --- Top 4 (Chunk 401 | Score 0.3328) ---
+  de MATLAB para tener una información más detallada. speye(m,n) Matriz identidad dispersa de tamaño m×n con unos en la diagonal sprand(m,n) Matriz aleatoria dispersa con distribución uniforme sprandn(m,n) sprandsym(n) spdiags(A) sparse(m,n) sparse(A) sparse(i,j,val,m,n) Construye una matriz dispersa a partir de: i vector de índices de fila, j vector de índices de columna, val vector de valores, m número de filas, n número de columnas, y un 6o argumento que permite definir el máximo nnz (por defecto en el tamaño de val) por si se quieren
+
+  --- Top 5 (Chunk 38 | Score 0.2603) ---
+  diferentes, separadas por comas. Como consecuencia, la respuesta del programa tiene tres partes también, cada una de ellas correspondiente a una de las instrucciones. Con la primera instrucción se define una matriz cuadrada (6×6) llamada A, cuyos elementos son números aleatorios entre cero y uno (aunque aparezcan sólo 4 cifras, han sido calculados con 16 cifras de precisión). En la segunda instrucción se define una matriz B que es igual a la inversa de A. Finalmente se ha multiplicado B por A, y se comprueba
+
+======================================================
+PREGUNTA 44: ¿Para qué sirven las funciones eval y evalc al evaluar una cadena de caracteres como expresión?
+RESPUESTA (Chunk #681 | Puntuacion BERT: 0.6560):
+que aparece sobre MATLAB ODE Suite, en la sección de Printable Documentation (PDF), en la ventana de Help. Estos documentos contienen una explicación muy detallada de todas las posibilidades de las funciones referidas, así como numerosos ejemplos. 6.10.4. LAS FUNCIONES EVAL, EVALC, FEVAL Y EVALIN Estas funciones tienen mucho que ver con las cadenas de caracteres, ya que necesitan la flexibilidad de éstas para alcanzar todas sus posibilidades. Las funciones para manipular cadenas de caracteres se verán en un próximo apartado. La función eval('cadena de
+
+  --- Top 1 (Chunk 681 | Score 0.6560) ---
+  que aparece sobre MATLAB ODE Suite, en la sección de Printable Documentation (PDF), en la ventana de Help. Estos documentos contienen una explicación muy detallada de todas las posibilidades de las funciones referidas, así como numerosos ejemplos. 6.10.4. LAS FUNCIONES EVAL, EVALC, FEVAL Y EVALIN Estas funciones tienen mucho que ver con las cadenas de caracteres, ya que necesitan la flexibilidad de éstas para alcanzar todas sus posibilidades. Las funciones para manipular cadenas de caracteres se verán en un próximo apartado. La función eval('cadena de
+
+  --- Top 2 (Chunk 685 | Score 0.6122) ---
+  a eval() pero con la diferencia de que cualquier salida que la expresión pasada como argumento hubiera enviado a la ventana de comandos de MATLAB es capturada, y almacenada en una matriz de caracteres T cuyas filas terminan con el carácter '\n'. Por su parte la función feval sirve para evaluar, dentro de dicha función, otra función cuya referencia o cuyo nombre contenido en una cadena de caracteres se le pasan como primer argumento. Es posible que este nombre se haya leído desde teclado o
+
+  --- Top 3 (Chunk 684 | Score 0.6090) ---
+  argumento a la función eval: for n = 1:10 eval(['A',num2str(n),' = magic(n)']) end La función eval() se puede usar también en la forma eval('tryString', 'catchString'). En este caso se evalúa la cadena 'tryString', y si se produce algún error se evalúa la cadena 'catchString'. Es una forma simplificada de gestionar errores en tiempo de ejecución. La función T=evalc() es similar a eval() pero con la diferencia de que cualquier salida que la expresión pasada como argumento hubiera enviado a la ventana de comandos de MATLAB
+
+  --- Top 4 (Chunk 682 | Score 0.4498) ---
+  flexibilidad de éstas para alcanzar todas sus posibilidades. Las funciones para manipular cadenas de caracteres se verán en un próximo apartado. La función eval('cadena de caracteres') hace que se evalúe como expresión de MATLAB el texto contenido entre las comillas como argumento de la función. Este texto puede ser un comando, una fórmula matemática o -en generalcualquier expresión válida de MATLAB. La función eval debe tener los valores de retorno necesarios para recoger los resultados de la expresión evaluada. Esta forma de definir macros es
+
+  --- Top 5 (Chunk 510 | Score 0.3242) ---
+  ejecuta la función sin por medio de la función feval, que tiene la siguiente forma general: feval(funcname, arg1, arg2, arg3, ...) donde funcname es una cadena de caracteres con el nombre de la función a evaluar, y arg1, arg2, arg3, ... son los argumentos que se le pasan a feval para que se los pueda pasar a funcname. A partir de la versión 6.0 de MATLAB ya no se pasa, a las funciones de función, el nombre de la función como en el ejemplo anterior,
+
+======================================================
+PREGUNTA 45: ¿Cómo se calculan las raíces de ecuaciones no lineales con fzero y el mínimo con fminbnd y fminsearch?
+RESPUESTA (Chunk #597 | Puntuacion BERT: 0.7162):
+el mínimo o los mínimos de una función. MATLAB dispone de las tres funciones siguientes: fzero calcula un cero o una raíz de una función de una variable fminbnd calcula el mínimo de una función de una variable fminsearch calcula el mínimo de una función de varias variables optimset permite establecer los parámetros del proceso de cálculo Se empezará con el cálculo de raíces. Del gráfico de la función prueba entre -1 y 2 resulta evidente que dicha función tiene dos raíces en ese intervalo.
+
+  --- Top 1 (Chunk 597 | Score 0.7162) ---
+  el mínimo o los mínimos de una función. MATLAB dispone de las tres funciones siguientes: fzero calcula un cero o una raíz de una función de una variable fminbnd calcula el mínimo de una función de una variable fminsearch calcula el mínimo de una función de varias variables optimset permite establecer los parámetros del proceso de cálculo Se empezará con el cálculo de raíces. Del gráfico de la función prueba entre -1 y 2 resulta evidente que dicha función tiene dos raíces en ese intervalo.
+
+  --- Top 2 (Chunk 596 | Score 0.5818) ---
+  de orden superior (Lobatto), mientras que la función dblquad() realiza integrales definidas dobles y la función triplequad() realiza integrales de volumen. Ver el Help o los manuales online para más información. 6.10.2. ECUACIONES NO LINEALES Y OPTIMIZACIÓN Después de todo, calcular integrales definidas no es tan difícil. Más difícil es desde luego calcular las raíces de ecuaciones no lineales, y el mínimo o los mínimos de una función. MATLAB dispone de las tres funciones siguientes: fzero calcula un cero o una raíz de una función
+
+  --- Top 3 (Chunk 604 | Score 0.3638) ---
+  signo de la función): >> plot(x,prueba2(x)) >> fminbnd(@prueba2, -1,2) ans = 0.3004 >> fminbnd(@prueba2, 0.5,1) ans = 0.8927 También a la función fminbnd se le puede pasar la estructura options. Por ejemplo, para fijar un error de 10-08 se puede proceder del siguiente modo: >> options=optimset('TolX', 1e-08); >> fminbnd(@prueba2, 0.5,1, options) fzero(@prueba, x, options) En cualquier caso, es importante observar que para calcular las raíces o los valores mínimos de una función, hay que pasar el nombre de esta función como argumento a la función
+
+  --- Top 4 (Chunk 598 | Score 0.2198) ---
+  el cálculo de raíces. Del gráfico de la función prueba entre -1 y 2 resulta evidente que dicha función tiene dos raíces en ese intervalo. La función fzero calcula una y se conforma: ¿Cuál es la que calcula? Pues depende de un parámetro o argumento que indica un punto de partida para buscar la raíz. Véanse los siguientes comandos y resultados: >> fzero(@prueba, -.5) ans = -0.1316 >> fzero(@prueba, 2) ans = 1.2995 En el primer caso se ha dicho al programa que empiece a
+
+  --- Top 5 (Chunk 603 | Score 0.2152) ---
+  función permitidas MaxIter máximo número de iteraciones TolX error máximo permitido en la abscisa de la raíz Ahora se va a calcular el mínimo de la función prueba. Defínase una función llamada prueba2 que sea prueba cambiada de signo, y trátese de reproducir en el PC los siguientes comandos y resultados (para calcular máximos con fmin bastaría con cambiar el signo de la función): >> plot(x,prueba2(x)) >> fminbnd(@prueba2, -1,2) ans = 0.3004 >> fminbnd(@prueba2, 0.5,1) ans = 0.8927 También a la función fminbnd se le
+
+======================================================
+PREGUNTA 46: ¿Cómo se crea una cuadrícula de puntos en el plano con la función meshgrid?
+RESPUESTA (Chunk #776 | Puntuacion BERT: 0.5149):
+ninguna abierta, sustituyendo cualquier cosa que hubiera dibujada anteriormente en esa ventana. Para verlo, se comenzará creando un par de vectores x e y con los que trabajar: >> x=[-10:0.2:10]; y=sin(x); Ahora se deben ejecutar los comandos siguientes (se comienza cerrando la ventana activa, para que al crear la nueva ventana aparezca en primer plano): >> close % se cierra la ventana gráfica activa anterior >> grid % se crea una ventana con una cuadrícula >> plot(x,y) % se dibuja la función seno borrando la
+
+  --- Top 1 (Chunk 776 | Score 0.5149) ---
+  ninguna abierta, sustituyendo cualquier cosa que hubiera dibujada anteriormente en esa ventana. Para verlo, se comenzará creando un par de vectores x e y con los que trabajar: >> x=[-10:0.2:10]; y=sin(x); Ahora se deben ejecutar los comandos siguientes (se comienza cerrando la ventana activa, para que al crear la nueva ventana aparezca en primer plano): >> close % se cierra la ventana gráfica activa anterior >> grid % se crea una ventana con una cuadrícula >> plot(x,y) % se dibuja la función seno borrando la
+
+  --- Top 2 (Chunk 901 | Score 0.4483) ---
+  mismo resultado que anteriormente: >> close, surf(X,Y,Z), pause(5), mesh(X,Y,Z) ¿Cuál es la ventaja de estas nuevas formas de las funciones ya conocidas? La principal es que admiten más variedad en la forma de representar la cuadrícula en el plano (x-y). La primera forma admite vectores x e y con puntos desigualmente espaciados, y la segunda admite conjuntos de puntos muy generales, incluso los provenientes de coordenadas cilíndricas y esféricas. 9.2.6. OTRAS FUNCIONES GRÁFICAS 3D Las siguientes funciones se derivan directamente de las anteriores, pero añaden
+
+  --- Top 3 (Chunk 43 | Score 0.3893) ---
+  seno(x)') En la Figura 4 se puede observar que se abre una nueva ventana en la que aparece representada la función sin(x). Esta figura tiene un título "Función seno(x)" y una cuadrícula o "grid". En realidad la línea anterior contiene también varias instrucciones separadas por comas o puntos y comas. En la primera se crea un vector x con 801 valores reales entre -4 y 4, separados por una centésima. A continuación se crea un vector y, cada uno de cuyos elementos es el seno
+
+  --- Top 4 (Chunk 872 | Score 0.3694) ---
+  crear dos matrices X (cuyas filas son copias de x) e Y (cuyas columnas son copias de y). Estas matrices se crean con la función meshgrid. Estas matrices representan respectivamente las coordenadas x e y de todos los puntos de la retícula. La matriz de valores Z se calcula a partir de las matrices de coordenadas X e Y. Finalmente hay que dibujar esta matriz Z con la función mesh, cuyos elementos son función elemento a elemento de los elementos de X e Y. Véase
+
+  --- Top 5 (Chunk 907 | Score 0.3669) ---
+  los datos de que se dispone. Utilícese el help para ello. meshz surfl light colorbar sphere cylinder 9.2.7. ELEMENTOS GENERALES: EJES, PUNTOS DE VISTA, LÍNEAS OCULTAS, ... Las funciones surf y mesh dibujan funciones tridimensionales en perspectiva. La localización del punto de vista o dirección de observación se puede hacer mediante la función view, que tiene la siguiente forma: view(azimut, elev) donde azimut es el ángulo de rotación de un plano horizontal, medido sobre el eje z a partir del eje x en sentido antihorario,
+
+======================================================
+PREGUNTA 47: ¿Para qué sirven las funciones size, length y diag aplicadas a matrices y vectores?
+RESPUESTA (Chunk #240 | Puntuacion BERT: 0.5072):
+representa el número π. [m,n]=size(A) devuelve el número de filas y de columnas de la matriz A. Si la matriz es cuadrada basta recoger el primer valor de retorno n=length(x) calcula el número de elementos de un vector x zeros(size(A)) forma una matriz de ceros del mismo tamaño que una matriz A previamente creada ones(size(A)) ídem con unos A=diag(x) forma una matriz diagonal A cuyos elementos diagonales son los elementos de un vector ya existente x forma un vector x a partir de los elementos
+
+  --- Top 1 (Chunk 240 | Score 0.5072) ---
+  representa el número π. [m,n]=size(A) devuelve el número de filas y de columnas de la matriz A. Si la matriz es cuadrada basta recoger el primer valor de retorno n=length(x) calcula el número de elementos de un vector x zeros(size(A)) forma una matriz de ceros del mismo tamaño que una matriz A previamente creada ones(size(A)) ídem con unos A=diag(x) forma una matriz diagonal A cuyos elementos diagonales son los elementos de un vector ya existente x forma un vector x a partir de los elementos
+
+  --- Top 2 (Chunk 640 | Score 0.2494) ---
+  llamar a odeplot status=0; switch flag case 'init' disp(['Entrando en salidaTiropar3 por primera vez']); odeplot(t,y,'init'); case 'done' disp(['Entrando en salidaTiropar3 por última vez']); odeplot([],[],'done'); case '' % puede haber resultados para más de un tiempo de salida for i=1:length(t) disp(['Entrando en salidaTiropar4 para t=',num2str(t(i))]); odeplot(t(i),y(:,i)); end end 53. % funcion para controlar los eventos 54. function [valor,esFinal,direccion]=tiropar3Eventos(t,y,m,c) 55. if y(2)>0 56. valor = y(4); % unico valor que se controla 57. esFinal = 0; % no termina la integración al llegar al suelo 58. direccion
+
+  --- Top 3 (Chunk 313 | Score 0.2466) ---
+  elementos diagonales de R sean positivos, lo cual crea dificultades en algunos problemas (esa factorización no coincide con la de Gram-Schmidt). similar a la anterior, pero con Q del mismo tamaño que A, es decir, sin completar una base ortonormal cuando m>n. factorización QR con pivotamiento por columnas. La matriz E es una matriz de permutación tal que A*E=Q*R. La matriz E se determina de modo que los elementos de abs(diag(R)) son decrecientes. devuelve una base ortonormal del subespacio nulo (kernel, o conjunto de vectores
+
+  --- Top 4 (Chunk 304 | Score 0.2415) ---
+  la diagonal) de una matriz cuadrada A [m,n] = size(A) devuelve el número de filas m y de columnas n de una matriz rectangular A n = size(A) devuelve el tamaño de una matriz cuadrada A nf = size(A,1) devuelve el número de filas de A nc = size(A,2) devuelve el número de columnas de A t = trace(A) 4.5.2. FUNCIONES MATRICIALES ESPECIALES Las funciones exp(), sqrt() y log() se aplican elemento a elemento a las matrices y/o vectores que se les pasan como argumentos.
+
+  --- Top 5 (Chunk 270 | Score 0.2124) ---
+  siguiente sección) y de funciones programadas por el usuario (que también se verán más adelante). 3.6. Operadores relacionales El lenguaje de programación de MATLAB dispone de los siguientes operadores relacionales: < menor que > mayor que <= menor o igual que >= mayor o igual que == igual que ~= distinto que11 Obsérvese que, salvo el último de ellos, coinciden con los correspondientes operadores relacionales de C. Sin embargo, ésta es una coincidencia más bien formal. En MATLAB los operadores relacionales pueden aplicarse a vectores
+
+======================================================
+PREGUNTA 48: ¿Cómo funciona el comando lookfor para buscar una palabra en la primera línea de comentario H1 y help?
+RESPUESTA (Chunk #491 | Puntuacion BERT: 0.6545):
+línea H1). En ella hay que intentar poner la información más relevante sobre esa función. La razón es que existe una función, llamada lookfor que busca una determinada palabra en cada primera línea de comentario de todas las funciones *.m. 6.3.6. HELP DE DIRECTORIOS MATLAB permite que los usuarios creen una ayuda general para todas las funciones que están en un determinado directorio. Para ello se debe crear en dicho directorio un fichero llamado contents.m. A continuación se muestra un fichero típico contents.m correspondiente al
+
+  --- Top 1 (Chunk 491 | Score 0.6545) ---
+  línea H1). En ella hay que intentar poner la información más relevante sobre esa función. La razón es que existe una función, llamada lookfor que busca una determinada palabra en cada primera línea de comentario de todas las funciones *.m. 6.3.6. HELP DE DIRECTORIOS MATLAB permite que los usuarios creen una ayuda general para todas las funciones que están en un determinado directorio. Para ello se debe crear en dicho directorio un fichero llamado contents.m. A continuación se muestra un fichero típico contents.m correspondiente al
+
+  --- Top 2 (Chunk 490 | Score 0.4277) ---
+  pues permiten construir un help sobre esa función. En otras palabras, cuando se teclea en la ventana de comandos de MATLAB: >> help mi_func el programa responde escribiendo las primeras líneas del fichero mi_func.m que comienzan por el carácter (%), es decir, que son comentarios. De estas líneas, tiene una importancia particular la primera línea de comentarios (llamada en ocasiones línea H1). En ella hay que intentar poner la información más relevante sobre esa función. La razón es que existe una función, llamada lookfor que
+
+  --- Top 3 (Chunk 460 | Score 0.3146) ---
+  funciones permiten extender las posibilidades de MATLAB; de hecho existen bibliotecas de ficheros *.m que se venden (toolkits) o se distribuyen gratuitamente (a través de Internet). Las funciones definidas en ficheros *.m se caracterizan porque la primera línea (que no sea un comentario) comienza por la palabra function, seguida por los valores de retorno (entre corchetes [ ] y separados por comas, si hay más de uno), el signo igual (=) y el nombre de la función, seguido de los argumentos (entre paréntesis y separados
+
+  --- Top 4 (Chunk 588 | Score 0.2453) ---
+  comandos son los siguientes: dir contenido del directorio actual what ficheros *.m en el directorio actual delete filename borra el fichero llamado filename mkdir(nd) crea un sub-directorio con el nombre nd copyfile(sc, dst) copia el fichero sc en el fichero dst type file.txt imprime por la pantalla el contenido del fichero de texto file.txt cd cambiar de directorio activo pwd muestra el path del directorio actual which func localiza una función llamada func lookfor palabra busca palabra en todas las primeras líneas de los ficheros
+
+  --- Top 5 (Chunk 589 | Score 0.2254) ---
+  muestra el path del directorio actual which func localiza una función llamada func lookfor palabra busca palabra en todas las primeras líneas de los ficheros *.m 6.10. Funciones de función Como ya se ha comentado al hablar de las referencias de función, en MATLAB existen funciones a las que hay que pasar como argumento el nombre de otras funciones, para que puedan ser llamadas desde dicha función. Así sucede por ejemplo si se desea calcular la integral definida de una función, resolver una ecuación no
+
+======================================================
+PREGUNTA 49: ¿Cómo se calcula la descomposición en valores singulares svd, la pseudo-inversa pinv y el rango rank?
+RESPUESTA (Chunk #316 | Puntuacion BERT: 0.7811):
+da valor unidad. las columnas de Q son una base ortonormal del espacio de columnas de A. El número de columnas de Q es el rango de A. Funciones basadas en la descomposición de valores singulares [U,D,V] = svd(A) descomposición de valor singular de una matriz rectangular (A=U*D*V'). U y V son matrices ortonormales. D es diagonal m×n (mismo tamaño que A) y contiene los valores singulares. B = pinv(A) calcula la pseudo-inversa de una matriz rectangular A. r = rank(A) calcula el rango r
+
+  --- Top 1 (Chunk 316 | Score 0.7811) ---
+  da valor unidad. las columnas de Q son una base ortonormal del espacio de columnas de A. El número de columnas de Q es el rango de A. Funciones basadas en la descomposición de valores singulares [U,D,V] = svd(A) descomposición de valor singular de una matriz rectangular (A=U*D*V'). U y V son matrices ortonormales. D es diagonal m×n (mismo tamaño que A) y contiene los valores singulares. B = pinv(A) calcula la pseudo-inversa de una matriz rectangular A. r = rank(A) calcula el rango r
+
+  --- Top 2 (Chunk 317 | Score 0.7042) ---
+  que A) y contiene los valores singulares. B = pinv(A) calcula la pseudo-inversa de una matriz rectangular A. r = rank(A) calcula el rango r de una matriz rectangular A. nor = norm(A) calcula la norma-2 de una matriz (el mayor valor singular). nor = norm(A,2) lo mismo que la anterior. nor = normest(A) calcula de forma aproximada la norma-2 con menos operaciones aritméticas que la función norm. condición numérica sub-2 de la matriz A. Es el cociente entre el máximo y el mínimo valor
+
+  --- Top 3 (Chunk 321 | Score 0.6407) ---
+  la descomposición de valor singular, que es el método más fiable y más caro en tiempo de cpu. La función rank(A) está basada en pinv(A). Normas de matrices: norm(A) norma-2, es decir, máximo valor singular de A, max(svd(A)). normest(A) calcula una estimación o aproximación de la norma-2. Útil para matrices grandes en las que norm(A) necesita demasiado tiempo norm(A,2) lo mismo que norm(A). norm(A,1) norma-1 de A, máxima suma de valores absolutos por columnas, es decir: max(sum(abs((A)))). norm(A,inf) norma-∞ de A, máxima suma de valores
+
+  --- Top 4 (Chunk 320 | Score 0.5289) ---
+  que el usuario lo pida) al ejecutar las funciones rref(A), orth(A), null(A) y pinv(A). Con rref(A) el rango se calcula como el número de filas diferentes de cero; con orth(A) y null(A) –basadas ambas en la descomposición QR– el rango es el número de columnas del resultado (o n menos el número de columnas del resultado). Con pinv(A) se utiliza la descomposición de valor singular, que es el método más fiable y más caro en tiempo de cpu. La función rank(A) está basada en pinv(A).
+
+  --- Top 5 (Chunk 855 | Score 0.2161) ---
+  parte, el menú Tools permite realizar desde menú algunas de las operaciones también disponibles en las barras de herramientas. Finalmente, el menú Help permite acceder a la ayuda concreta que hace referencia a las ventanas gráficas. 9. GRÁFICOS TRIDIMENSIONALES Quizás sea ésta una de las características de MATLAB que más admiración despierta entre los usuarios no técnicos (cualquier alumno de ingeniería sabe que hay ciertas operaciones algebraicas – como la descomposición de valores singulares, sin ir más lejos– que tienen dificultades muy superiores, aunque "luzcan"
+
+======================================================
+PREGUNTA 50: ¿Cómo se evalúa una función pasada como argumento mediante feval o un function handle?
+RESPUESTA (Chunk #511 | Puntuacion BERT: 0.4309):
+de la versión 6.0 de MATLAB ya no se pasa, a las funciones de función, el nombre de la función como en el ejemplo anterior, sino una referencia de función o function handle. De todas formas, para mantener la compatibilidad con los programas desarrollados en versiones anteriores, se sigue admitiendo que se pase a feval el nombre de la función, pero este mecanismo ya no se soportará en versiones posteriores. En MATLAB 6.* la forma correcta de ejecutar el ejemplo anterior sería (se explicará con
+
+  --- Top 1 (Chunk 511 | Score 0.4309) ---
+  de la versión 6.0 de MATLAB ya no se pasa, a las funciones de función, el nombre de la función como en el ejemplo anterior, sino una referencia de función o function handle. De todas formas, para mantener la compatibilidad con los programas desarrollados en versiones anteriores, se sigue admitiendo que se pase a feval el nombre de la función, pero este mecanismo ya no se soportará en versiones posteriores. En MATLAB 6.* la forma correcta de ejecutar el ejemplo anterior sería (se explicará con
+
+  --- Top 2 (Chunk 687 | Score 0.4228) ---
+  se quiere evaluar la función calcular(A, b, c), donde el nombre calcular o la referencia @calcular se envía como argumento en la cadena nombre, entonces feval(nombre, A, b, c) equivale a calcular(A, b, c). Finalmente, la función evalin(ws, 'expresion') evalúa 'expresion' en el espacio de trabajo ws. Los posibles valores de ws son 'caller' y 'base', que indican el espacio de trabajo de la función que llama a evalin o el espacio de trabajo base. Los valores de retorno se recogen del modo habitual. 6.11.
+
+  --- Top 3 (Chunk 684 | Score 0.3624) ---
+  argumento a la función eval: for n = 1:10 eval(['A',num2str(n),' = magic(n)']) end La función eval() se puede usar también en la forma eval('tryString', 'catchString'). En este caso se evalúa la cadena 'tryString', y si se produce algún error se evalúa la cadena 'catchString'. Es una forma simplificada de gestionar errores en tiempo de ejecución. La función T=evalc() es similar a eval() pero con la diferencia de que cualquier salida que la expresión pasada como argumento hubiera enviado a la ventana de comandos de MATLAB
+
+  --- Top 4 (Chunk 641 | Score 0.3125) ---
+  56. valor = y(4); % unico valor que se controla 57. esFinal = 0; % no termina la integración al llegar al suelo 58. direccion = 1; % llegar al suelo en dirección ascendente 59. else 60. valor = y(4); 61. esFinal = 1; % termina la integración al llegar al suelo 62. direccion = -1; % llegar al suelo en dirección descndente 63. end Por otra parte, el fichero tiropar3.m que evalúa la ecuación diferencial es el siguiente: 1. function dy=tiropar3(t,y,m,c) % version vectorizada
+
+  --- Top 5 (Chunk 685 | Score 0.3105) ---
+  a eval() pero con la diferencia de que cualquier salida que la expresión pasada como argumento hubiera enviado a la ventana de comandos de MATLAB es capturada, y almacenada en una matriz de caracteres T cuyas filas terminan con el carácter '\n'. Por su parte la función feval sirve para evaluar, dentro de dicha función, otra función cuya referencia o cuyo nombre contenido en una cadena de caracteres se le pasan como primer argumento. Es posible que este nombre se haya leído desde teclado o
+

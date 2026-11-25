@@ -1,0 +1,244 @@
+RAG GENERATIVO CON BERT MULTILINGÜE Y OLLAMA
+==========================================================
+
+DESCRIPCIÓN
+-----------
+Proyecto RAG desarrollado en MATLAB R2024a/R2024b/2025a/2025b para consultar un manual
+ técnico de MATLAB en PDF. El sistema recupera los fragmentos más relevantes
+mediante embeddings de BERT multilingüe ajustado contrastivamente y una
+puntuación híbrida. A continuación, utiliza un modelo local de Ollama para
+generar una respuesta basada en los fragmentos recuperados.
+
+El flujo se divide en tres scripts:
+
+  preparar_BERT_multilingue_R2024.m
+      Prepara y guarda el modelo BERT multilingüe base.
+
+  RAG_BERT_contrastivo.m
+      Extrae y limpia el texto del PDF, genera los fragmentos, realiza el
+      ajuste contrastivo opcional de BERT, calcula los embeddings, construye
+      el índice y comprueba la recuperación con una batería de 50 preguntas.
+
+  RAG_Generativo_MEAN.m
+      Carga el modelo y el índice, recupera los fragmentos de cada consulta
+      y genera una respuesta con Llama 3.2 ejecutado localmente mediante Ollama.
+
+
+REQUISITOS
+----------
+- MATLAB R2024a, R2024b, R2025a o R2025b.
+- Text Analytics Toolbox.
+- Deep Learning Toolbox.
+- Complemento de MathWorks:
+  Text Analytics Toolbox Model for BERT-Base Multilingual Cased Network.
+- Ollama instalado y en ejecución para utilizar el RAG generativo.
+- Modelo llama3.2:latest descargado en Ollama.
+- GPU opcional. El proyecto puede ejecutarse en CPU.
+
+La parte de recuperación y generación se ejecuta desde MATLAB. Ollama se
+utiliza como servicio local; no se necesita enviar el documento a una API
+externa de generación.
+
+
+ARCHIVOS Y ESTRUCTURA DE CARPETAS
+---------------------------------
+Los tres scripts y el documento PDF deben estar en la misma carpeta, o se
+debe seleccionar el PDF cuando el programa lo solicite.
+
+Archivos principales:
+	- preparar_BERT_multilingue_R2024.m
+	- RAG_BERT_contrastivo.m
+	- RAG_Generativo_MEAN.m
+	- documento.pdf
+
+Archivos generados:
+	- bert_multilingue_base.mat
+
+	Opción MEAN POOLING:
+	- bert_multilingue_contrastivo_MEAN.mat
+	- indice_RAG_BERT_MEAN.mat
+	- respuestas_50_preguntas_MATLAB_MEAN.txt
+
+	Opción CLS:
+	- bert_multilingue_contrastivo_CLS.mat
+	- indice_RAG_BERT_CLS.mat
+	- respuestas_50_preguntas_MATLAB_CLS.txt
+
+El modelo contrastivo y el índice se generan durante la preparación y la
+indexación. No es necesario volver a entrenar BERT cada vez que se consulta
+el documento.
+
+
+PASOS DE INSTALACIÓN Y EJECUCIÓN
+-------------------------------
+1. Instalar los requisitos de MATLAB indicados anteriormente.
+
+2. Ejecutar preparar_BERT_multilingue_R2024.m para preparar el modelo
+   BERT multilingüe base. Si falta el complemento de MathWorks, instalarlo
+   desde Add-On Explorer y volver a ejecutar el script.
+
+3. Colocar documento.pdf en la carpeta del proyecto. El script de
+   preparación del RAG también permite seleccionar el PDF si no lo encuentra.
+
+4. Abrir RAG_BERT_contrastivo.m.
+
+   - Usar la configuración CLS o MEAN POOLING comentando la que no se usa
+     y dejando sin comentario la que se va a usar
+
+   - Para realizar el ajuste contrastivo desde el modelo base, establecer:
+         cfg.ajustarBERT = true;
+     En este modo se carga bert_multilingue_base.mat, se realiza el ajuste
+     contrastivo y se guarda bert_multilingue_contrastivo_XXXX.mat. XXXX
+     simboliza CLS o MEAN POOLING.
+
+   - Una vez generado el modelo contrastivo, para ejecuciones posteriores
+     establecer:
+         cfg.ajustarBERT = false;
+     Así se carga directamente el modelo ya entrenado y se evita repetir
+     el entrenamiento.
+
+5. Ejecutar RAG_BERT_contrastivo.m. El programa extrae y limpia el
+   texto, genera los chunks, calcula sus embeddings y construye el índice.
+   También ejecuta una batería de 50 preguntas y guarda los resultados en
+   respuestas_50_preguntas_MATLAB_XXXX.txt.
+
+6. Instalar Ollama y descargar el modelo utilizado:
+         ollama pull llama3.2:latest
+   Iniciar Ollama antes de ejecutar el script generativo. El servicio local
+   utilizado es:
+         http://localhost:11434/api/chat
+
+7. Ejecutar RAG_Generativo_MEAN.m. El programa comprueba que existen el
+   modelo contrastivo y el índice, verifica la conexión con Ollama y permite
+   introducir preguntas desde la ventana de comandos. Escribir "salir" para
+   terminar. Si se desea usar CLS habría que copiar sus bloques donde corresponde.
+
+8. Si se modifica o se vuelve a entrenar el modelo BERT, el script generativo
+   detecta que la fecha del modelo no coincide con la del índice y recalcula
+   los embeddings y los datos de indexación necesarios.
+
+
+PROCESAMIENTO DEL DOCUMENTO Y RECUPERACIÓN
+------------------------------------------
+1. Extracción y limpieza del PDF
+   Se utiliza extractFileText para extraer el texto seleccionable del PDF.
+   Después se normalizan los espacios, se eliminan determinados elementos
+   repetidos de cabeceras y pies de página y se corrigen palabras partidas
+   por guiones al final de línea. También se filtran fragmentos identificados
+   como parte del índice del documento.
+
+2. División en fragmentos (chunking)
+   El texto se divide en fragmentos de 85 palabras, con un solapamiento de
+   25 palabras entre fragmentos consecutivos. El solapamiento busca reducir
+   la pérdida de contexto cuando una explicación queda dividida entre dos
+   fragmentos.
+
+3. Codificación con BERT
+   Cada fragmento y cada consulta se tokenizan con el tokenizer del modelo
+   BERT multilingüe. La longitud máxima configurada es de 160 tokens. Las
+   inferencias de indexación se realizan en lotes de 8 por defecto.
+
+4. Representación mediante Mean Pooling
+   En lugar de utilizar únicamente la salida correspondiente al primer
+   token [CLS], se calcula el promedio de las representaciones de los tokens
+   de la secuencia, utilizando la máscara de atención para no incluir las
+   posiciones de padding. El vector resultante se normaliza. Se puede usar
+   CLS si se quiere.
+
+5. Centrado y normalización de embeddings
+   Se calcula la media global de los embeddings de los fragmentos. A cada
+   embedding se le resta esa media y se vuelve a normalizar. En las consultas
+   se aplica la misma transformación antes de calcular la similitud.
+
+6. Puntuación híbrida de recuperación
+   Se combinan dos señales:
+      - 35 %: similitud coseno entre los embeddings de BERT.
+      - 65 %: coincidencia de secuencias de tokens de BERT presentes en la
+        consulta y en los fragmentos, ponderada mediante IDF al cuadrado.
+   La ponderación IDF da más importancia a términos menos frecuentes en el
+   documento. Se ordenan los fragmentos por la puntuación combinada y se
+   seleccionan los cinco primeros por defecto.
+
+7. Generación de respuesta
+   Los cinco fragmentos recuperados se envían como contexto a Ollama junto
+   con la pregunta. El prompt indica al modelo que responda en español, que
+   utilice la información del contexto, que no invente datos ni sintaxis y
+   que reconozca expresamente cuándo el contexto no es suficiente.
+
+8. Presentación de fuentes
+   MATLAB muestra los identificadores originales de los chunks recuperados
+   y sus puntuaciones. Las referencias se asignan desde MATLAB, no desde el
+   texto generado por el modelo.
+
+
+AJUSTE CONTRASTIVO Y ELECCIÓN DEL POOLING
+----------------------------------------
+El modelo parte de BERT-Base Multilingual Cased de MathWorks. El ajuste fino
+contrastivo utiliza una estrategia de tipo SimCSE con una pérdida InfoNCE.
+
+Para cada fragmento se forman dos representaciones de la misma entrada. Se
+consideran positivas las dos representaciones del mismo fragmento y el resto
+de representaciones del lote actúan como negativos en la comparación
+contrastiva. El objetivo es acercar las representaciones positivas y separar
+las representaciones de fragmentos diferentes.
+
+Parámetros principales configurados en el script:
+- Dos épocas como máximo.
+- Lote de entrenamiento de 6 fragmentos.
+- Máximo de 25 lotes por época.
+- Tasa de aprendizaje: 5e-6.
+- Temperatura InfoNCE: 0.10.
+- Parada temprana si la pérdida alcanza 0.01 o menos.
+- Criterio de paciencia: detener si pasan 15 lotes sin una mejora mínima
+  de 0.005 y restaurar el mejor modelo encontrado.
+
+Se compararon dos formas de obtener el embedding de cada texto:
+- CLS: utilizar exclusivamente la representación del primer token [CLS].
+- Mean Pooling: promediar las representaciones de los tokens no-padding de
+  la secuencia.
+
+Se mantuvo Mean Pooling porque, en la comparación interna realizada con
+50 preguntas, ofreció un resultado ligeramente mejor y muy similar en el
+resto de los casos. El recuento observado fue aproximadamente de 12 casos
+favorables a Mean Pooling, 36 resultados similares y 2 favorables a CLS.
+Esta comparación es una evaluación inicial sobre las preguntas del proyecto,
+no un benchmark independiente ni una demostración de que Mean Pooling sea
+siempre superior a CLS.
+
+La motivación técnica para probar Mean Pooling es que utiliza información
+distribuida a lo largo de la secuencia, en vez de depender únicamente del
+vector del token [CLS]. Sin embargo, el pooling por sí solo no garantiza
+embeddings semánticos de calidad. Por eso se combina con el ajuste
+contrastivo y se comprueba su comportamiento mediante preguntas de prueba.
+
+
+LIMITACIONES Y CONSIDERACIONES
+------------------------------
+- El sistema es un prototipo académico y necesita una evaluación más amplia
+  para medir formalmente la calidad de recuperación y generación.
+- Las puntuaciones de recuperación son valores de ranking; no son
+  probabilidades ni porcentajes de confianza.
+- Recuperar cinco fragmentos no garantiza que todos sean relevantes. Una
+  consulta ambigua o muy general puede recuperar contenido relacionado,
+  pero insuficiente para responder exactamente.
+- El modelo generativo puede introducir información que no aparece en el
+  contexto. El prompt reduce ese riesgo, pero no lo elimina por completo.
+- El texto de entrada de BERT se limita a 160 tokens por fragmento. Si un
+  fragmento supera ese límite, la codificación lo trunca.
+- El PDF debe contener texto seleccionable. Los documentos escaneados
+  pueden requerir OCR, que no está incluido en este flujo.
+- Los parámetros de chunking, los pesos de recuperación y el número de
+  fragmentos recuperados son configuraciones experimentales y pueden
+  necesitar ajustes según el documento y las preguntas.
+- El filtro de calidad adicional de chunks no se considera parte del flujo
+  definitivo mientras no se valide con los fragmentos descartados y con la
+  batería de evaluación.
+
+
+RESUMEN DEL FLUJO
+-----------------
+PDF -> extracción y limpieza -> eliminación del índice -> chunking con
+solapamiento -> tokenización BERT -> Mean Pooling -> ajuste contrastivo
+InfoNCE -> embeddings centrados y normalizados -> recuperación híbrida
+(coseno + coincidencia de tokens IDF^2) -> selección de cinco fragmentos
+-> generación local con Llama 3.2 mediante Ollama -> respuesta y fuentes.
